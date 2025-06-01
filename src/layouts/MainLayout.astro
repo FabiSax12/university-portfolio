@@ -1,0 +1,58 @@
+---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import "../styles/global.css";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body
+    class="grid grid-rows-[1fr_auto] min-h-dvh bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white antialiased"
+  >
+    <Header />
+    <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script is:inline>
+  // Prevenir flash of unstyled content (FOUC)
+  (function () {
+    const theme = localStorage.getItem("theme");
+    const systemDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    // Determinar tema inicial
+    const isDark = theme === "dark" || (!theme && systemDark);
+
+    // Aplicar inmediatamente
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    }
+
+    // Marcar como inicializado para evitar flickering
+    document.documentElement.setAttribute("data-theme-initialized", "true");
+  })();
+</script>
+
+<!-- CSS para prevenir FOUC -->
+<style is:inline>
+  /* Ocultar contenido hasta que el tema esté inicializado */
+  html:not([data-theme-initialized]) {
+    visibility: hidden;
+  }
+
+  html[data-theme-initialized] {
+    visibility: visible;
+  }
+</style>
