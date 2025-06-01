@@ -1,0 +1,19 @@
+---
+import TechCarousel from "@/components/tech-stack/TechCarousel.astro";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Tech Stack" } = Astro.props;
+---
+
+<div class="opacity-0 pb-20 pt-0 lg:pt-4 animate-fade-in-up">
+  <h3
+    class="text-2xl font-semibold text-zinc-900 dark:text-white mb-10 text-center"
+  >
+    {title}
+  </h3>
+
+  <TechCarousel />
+</div>

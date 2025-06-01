@@ -1,0 +1,333 @@
+---
+import TechCard from "./TechCard.astro";
+import { techStack } from "@/data/tech-stack";
+
+interface Props {
+  speed?: number;
+  pauseOnHover?: boolean;
+  direction?: "left" | "right";
+  duplicateCount?: number;
+  autoPlay?: boolean;
+  responsive?: {
+    mobile?: number;
+    tablet?: number;
+    desktop?: number;
+  };
+}
+
+const {
+  speed = 30,
+  pauseOnHover = true,
+  direction = "left",
+  duplicateCount = 2,
+  autoPlay = true,
+  responsive = {
+    mobile: 15,
+    tablet: 20,
+    desktop: 25,
+  },
+} = Astro.props;
+
+// Crear arrays duplicados según duplicateCount
+const duplicatedStacks = Array(duplicateCount + 1)
+  .fill(techStack)
+  .flat();
+---
+
+<div
+  class="w-full max-w-5xl mx-auto py-12 px-4 overflow-hidden tech-carousel-container"
+>
+  <div class="relative">
+    <!-- Gradient Overlays -->
+    <div
+      class="absolute top-0 bottom-0 left-0 z-10 w-44 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent pointer-events-none"
+    >
+    </div>
+    <div
+      class="absolute top-0 bottom-0 right-0 z-10 w-44 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent pointer-events-none"
+    >
+    </div>
+    <div class="w-full relative" role="region" aria-roledescription="carousel">
+      <div class="overflow-hidden">
+        <div
+          id="configurable-carousel"
+          class="flex"
+          data-speed={speed}
+          data-direction={direction}
+          data-pause-on-hover={pauseOnHover}
+          data-auto-play={autoPlay}
+          data-responsive={JSON.stringify(responsive)}
+        >
+          {
+            duplicatedStacks.map((tech, globalIndex) => {
+              const groupIndex = Math.floor(globalIndex / techStack.length);
+              const techIndex = globalIndex % techStack.length;
+
+              return (
+                <div
+                  class="min-w-0 shrink-0 grow-0 pl-4 basis-1/5 md:basis-1/6 lg:basis-1/8"
+                  data-group={groupIndex}
+                  data-tech-index={techIndex}
+                  data-global-index={globalIndex}
+                >
+                  <TechCard
+                    name={tech.name}
+                    color={tech.textColor}
+                    textColor={tech.textColor}
+                    gradientFrom={tech.gradientFrom}
+                    gradientTo={tech.gradientTo}
+                    borderColor={tech.borderColor}
+                    shadowColor={tech.shadowColor}
+                    iconComponent={tech.iconComponent}
+                    icon={tech.icon}
+                  />
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div
+      class="mt-4 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-1 overflow-hidden"
+    >
+      <div
+        id="carousel-progress"
+        class="h-full bg-violet-500 transition-all duration-100 ease-linear rounded-full"
+        style="width: 0%"
+      >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script lang="js">
+  class ConfigurableCarousel {
+    constructor(element) {
+      this.carousel = element;
+      this.container = element.closest(".tech-carousel-container");
+      this.speed = parseInt(element.dataset.speed) || 25;
+      this.direction = element.dataset.direction || "left";
+      this.pauseOnHover = element.dataset.pauseOnHover === "true";
+      this.autoPlay = element.dataset.autoPlay === "true";
+      this.responsive = JSON.parse(element.dataset.responsive || "{}");
+
+      // Estado
+      this.currentTranslateX = 0;
+      this.animationId = null;
+      this.isPaused = !this.autoPlay;
+      this.startTime = Date.now();
+      this.pausedTime = 0;
+      this.groupWidth = 0;
+
+      // Elementos UI
+      this.progressBar = this.container?.querySelector("#carousel-progress");
+
+      this.init();
+    }
+
+    init() {
+      this.setupCarousel();
+      this.updateSpeed();
+      this.setupEventListeners();
+
+      if (this.autoPlay) {
+        this.startAnimation();
+      }
+    }
+
+    setupCarousel() {
+      // Calcular el ancho de un grupo completo
+      const items = this.carousel.querySelectorAll('[data-group="0"]');
+      if (items.length > 0) {
+        this.groupWidth = Array.from(items).reduce((total, item) => {
+          return total + item.offsetWidth;
+        }, 0);
+      }
+    }
+
+    updateSpeed() {
+      // Ajustar velocidad según el viewport
+      const width = window.innerWidth;
+      if (width <= 768 && this.responsive.mobile) {
+        this.speed = this.responsive.mobile;
+      } else if (width <= 1024 && this.responsive.tablet) {
+        this.speed = this.responsive.tablet;
+      } else if (this.responsive.desktop) {
+        this.speed = this.responsive.desktop;
+      }
+    }
+
+    startAnimation() {
+      const animate = () => {
+        if (!this.isPaused) {
+          const elapsed = Date.now() - this.startTime - this.pausedTime;
+          const cycleDuration = this.speed * 1000;
+          const progress = (elapsed / cycleDuration) % 1;
+
+          // Calcular posición según dirección
+          if (this.direction === "left") {
+            this.currentTranslateX = -(progress * this.groupWidth);
+          } else {
+            this.currentTranslateX =
+              progress * this.groupWidth - this.groupWidth;
+          }
+
+          this.carousel.style.transform = `translateX(${this.currentTranslateX}px)`;
+
+          // Actualizar barra de progreso
+          this.updateProgressBar(progress);
+        }
+
+        this.animationId = requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+
+    updateProgressBar(progress) {
+      if (this.progressBar) {
+        this.progressBar.style.width = `${progress * 100}%`;
+      }
+    }
+
+    play() {
+      if (this.isPaused) {
+        this.isPaused = false;
+        if (this.pauseStartTime) {
+          this.pausedTime += Date.now() - this.pauseStartTime;
+        }
+        if (!this.animationId) {
+          this.startAnimation();
+        }
+      }
+    }
+
+    pause() {
+      if (!this.isPaused) {
+        this.isPaused = true;
+        this.pauseStartTime = Date.now();
+      }
+    }
+
+    toggle() {
+      if (this.isPaused) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    }
+
+    setupEventListeners() {
+      // Play/Pause button
+      this.playPauseBtn?.addEventListener("click", () => this.toggle());
+
+      // Hover events
+      if (this.pauseOnHover) {
+        this.carousel.addEventListener("mouseenter", () => this.pause());
+        this.carousel.addEventListener("mouseleave", () => {
+          if (this.autoPlay) this.play();
+        });
+      }
+
+      // Visibility change
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          this.pause();
+        } else if (this.autoPlay) {
+          this.play();
+        }
+      });
+
+      // Resize
+      window.addEventListener("resize", () => {
+        this.setupCarousel();
+        this.updateSpeed();
+      });
+
+      // Keyboard controls
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space" && e.target === document.body) {
+          e.preventDefault();
+          this.toggle();
+        }
+      });
+    }
+
+    destroy() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
+    }
+  }
+
+  // Inicializar carrusel
+  function initCarousel() {
+    const carousel = document.getElementById("configurable-carousel");
+    if (carousel && !carousel.dataset.initialized) {
+      new ConfigurableCarousel(carousel);
+      carousel.dataset.initialized = "true";
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCarousel);
+  } else {
+    initCarousel();
+  }
+</script>
+
+<style>
+  .tech-carousel-container {
+    /* Variables CSS para personalización */
+    --carousel-speed: 25s;
+    --carousel-pause-color: rgba(255, 255, 255, 0.1);
+    --carousel-progress-color: rgb(139, 92, 246);
+  }
+
+  /* Animación de respaldo */
+  @media (prefers-reduced-motion: no-preference) {
+    .no-js #configurable-carousel {
+      animation: scroll-left-backup var(--carousel-speed) linear infinite;
+    }
+  }
+
+  @keyframes scroll-left-backup {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  /* Suavizar transformaciones */
+  #configurable-carousel {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Responsive speeds via CSS */
+  @media (max-width: 768px) {
+    .tech-carousel-container {
+      --carousel-speed: 15s;
+    }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .tech-carousel-container {
+      --carousel-speed: 20s;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    #configurable-carousel {
+      animation: none !important;
+    }
+  }
+</style>
