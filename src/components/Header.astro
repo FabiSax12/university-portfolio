@@ -1,0 +1,63 @@
+---
+import { Sun, Moon, Globe } from "lucide-astro";
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a class="flex items-center" href="/">
+        <span class="text-xl font-bold text-zinc-900 dark:text-white">
+          Fabian
+          <span class="text-violet-600 dark:text-violet-400">Vargas</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-4">
+        <div class="relative">
+          <button
+            class="p-2 rounded-full bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors cursor-pointer flex items-center gap-1.5"
+            aria-label="Cambiar idioma"
+          >
+            <Globe />
+            <span class="hidden sm:inline text-sm font-medium uppercase">
+              es
+            </span>
+          </button>
+        </div>
+        <button
+          class="p-2 rounded-full bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors cursor-pointer"
+          aria-label="Cambiar tema"
+        >
+          <Sun class="text-amber-500 hidden dark:block" />
+          <Moon class="text-violet-600 block dark:hidden" />
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const themeButton = document.querySelector(
+    'button[aria-label="Cambiar tema"]',
+  );
+
+  const languageButton = document.querySelector(
+    'button[aria-label="Cambiar idioma"]',
+  );
+
+  themeButton?.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+
+    // Save the theme preference in localStorage
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+
+    localStorage.setItem("theme", currentTheme);
+  });
+
+  languageButton?.addEventListener("click", () => {
+    alert("Language change functionality is not implemented yet.");
+  });
+</script>
