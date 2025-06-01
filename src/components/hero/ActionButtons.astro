@@ -1,0 +1,33 @@
+---
+import { Mail, Download } from "lucide-astro";
+import Button from "../ui/Button.astro";
+import Link from "../ui/Link.astro";
+
+interface Props {
+  cvUrl?: string;
+  contactText?: string;
+  downloadText?: string;
+  fileName?: string;
+}
+
+const {
+  cvUrl = "/docs/cv.pdf",
+  contactText = "Contáctame",
+  downloadText = "Descargar CV",
+  fileName = "Fabian Vargas CV.pdf",
+} = Astro.props;
+---
+
+<div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+  <!-- Contact Button -->
+  <Button>
+    <Mail class="w-4 h-4 mr-2" />
+    {contactText}
+  </Button>
+
+  <!-- Download CV Button -->
+  <Link href={cvUrl} download={fileName}>
+    <Download class="w-4 h-4 mr-2" />
+    {downloadText}
+  </Link>
+</div>

@@ -1,0 +1,61 @@
+---
+import ProfileImage from "../hero/ProfileImage.astro";
+import ActionButtons from "../hero/ActionButtons.astro";
+import SocialLinks from "../hero/SocialLinks.astro";
+
+interface Props {
+  name?: string;
+  title?: string;
+  description?: string;
+  profileImage?: string;
+  cvUrl?: string;
+}
+
+const {
+  name = "Fabián",
+  title = "Estudiante de Ingeniería en Computación y Desarrollador Web Full Stack",
+  description = "Soy un apasionado de construir con arquitecturas modernas y la escalabilidad. Amo la Programación Orientada a Objetos, los principios SOLID y el Clean Code. Experimentado con React, TypeScript, Node.js y frameworks backend de NodeJs.",
+  profileImage = "/Yo.jpg",
+  cvUrl = "/docs/en/cv.pdf",
+} = Astro.props;
+---
+
+<div class="min-h-dvh flex flex-col pt-8">
+  <div
+    class="flex-1 flex flex-col-reverse lg:flex-row items-center justify-center gap-8 lg:gap-12 py-8 lg:py-20"
+  >
+    <!-- Content Section -->
+    <div
+      class="opacity-0 flex-1 space-y-4 lg:space-y-6 max-w-2xl px-4 text-center lg:text-left animate-fade-in-up"
+    >
+      <div class="space-y-2">
+        <h1
+          class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-zinc-900 dark:text-white leading-tight flex flex-wrap items-baseline gap-x-2 gap-y-1 justify-center lg:justify-start"
+        >
+          <span class="whitespace-nowrap">Hola, Soy</span>
+          <span class="whitespace-nowrap text-violet-600 dark:text-violet-400"
+            >{name}</span
+          >
+        </h1>
+
+        <h2
+          class="text-base sm:text-lg lg:text-xl xl:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed"
+        >
+          {title}
+        </h2>
+      </div>
+
+      <p
+        class="text-sm sm:text-base lg:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
+      >
+        {description}
+      </p>
+
+      <ActionButtons cvUrl={cvUrl} />
+      <SocialLinks />
+    </div>
+
+    <!-- Profile Image -->
+    <ProfileImage src={profileImage} alt="Foto de perfil" />
+  </div>
+</div>
