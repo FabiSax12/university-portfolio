@@ -1,0 +1,239 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn-base.css";
+
+@config "../../tailwind.config.ts";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --default-transition-duration: .15s;
+  --default-transition-timing-function: cubic-bezier(.4,0,.2,1);
+  --default-font-family: var(--font-geist-sans);
+  --default-mono-font-family: var(--font-geist-mono);
+
+
+  --animate-fade-in-up: fade-in-up .6s ease-out forwards;
+  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+}
+
+.animate-fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+.animate-fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+.animate-fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+
+/* Tema personalizado */
+:root {
+  --primary: var(--color-violet-600); /*hsl(212, 100%, 48%)*/
+  --secondary: var(--color-zinc-700); /*hsl(270, 67%, 47%)*/
+  --success: hsl(212, 100%, 48%);
+  --info: hsl(212, 94%, 57%);
+  --warning: hsl(0, 100%, 65%);
+  --danger: hsl(0, 100%, 50%);
+  --light: hsl(0, 0%, 96%);
+  --dark: hsl(210, 8%, 9%);
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 8%, 9%);
+  --accents-1: hsl(0, 0%, 98%);
+  --accents-2: hsl(0, 0%, 92%);
+  --accents-3: hsl(0, 0%, 60%);
+  --accents-4: hsl(0, 0%, 53%);
+  --accents-5: hsl(0, 0%, 40%);
+  --accents-6: hsl(0, 0%, 27%);
+  --accents-7: hsl(0, 0%, 20%);
+  --accents-8: hsl(0, 0%, 7%);
+
+  --geist-foreground: hsl(210, 8%, 9%);
+  --geist-background: hsl(0, 0%, 100%);
+
+  --border-radius: 0.625rem;
+
+
+  --shadow-smallest: 0 2px 4px rgba(0, 0, 0, .1);
+  --shadow-small: 0 5px 10px rgba(0, 0, 0, .12);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, .12);
+  --shadow-large: 0 30px 60px rgba(0, 0, 0, .12);
+
+  --radius: var(--border-radius);
+  --background: var(--background);
+  --foreground: var(--foreground);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--secondary);
+  --secondary-foreground: #ffffff;
+  --muted: var(--accents-1);
+  --muted-foreground: var(--accents-5);
+  --accent: var(--accents-2);
+  --accent-foreground: var(--foreground);
+  --destructive: var(--danger);
+  --border: var(--accents-2);
+  --input: var(--accents-2);
+  --ring: var(--accents-4);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: var(--info);
+  --chart-4: var(--warning);
+  --chart-5: var(--danger);
+
+
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* Modo oscuro usando la clase .dark, compatible con shadcn */
+.dark {
+  --primary: var(--color-violet-600);
+  --primary-foreground: #ffffff;
+  --primary-hover: var(--color-violet-500);
+
+  --secondary: var(--color-zinc-800);
+  --secondary-foreground: #ffffff;
+
+  --background: var(--color-zinc-900);
+  --foreground: var(--color-white);
+
+  --card: var(--accents-1);
+  --card-foreground: var(--foreground);
+
+  --popover: var(--accents-1);
+  --popover-foreground: var(--foreground);
+
+  --muted: var(--accents-8);
+  --muted-foreground: var(--accents-4);
+
+  --accent: var(--accents-7);
+  --accent-foreground: var(--foreground);
+
+  --destructive: var(--danger);
+
+  --border: var(--accents-7);
+  --input: var(--accents-7);
+  --ring: var(--accents-5);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: var(--info);
+  --chart-4: var(--warning);
+  --chart-5: var(--danger);
+
+  --sidebar: var(--accents-1);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.card {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-small);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-medium);
+}
+
+.button {
+  border-radius: var(--radius);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+}
+
+.button-primary:hover {
+  background-color: var(--info);
+}
+
+.button-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: none;
+}
+
+.button-secondary:hover {
+  background-color: #9045d6;
+}
+
+.navbar {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+}
+
+.footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+    .tech-carousel {
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .tech-carousel:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes scroll-left {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+  }
