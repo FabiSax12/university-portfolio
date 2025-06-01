@@ -1,0 +1,53 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  variant?: "solid" | "link" | "hoverEffect";
+  isIconOnly?: boolean;
+}
+
+const {
+  href,
+  download,
+  variant = "solid",
+  isIconOnly = false,
+  class: classNameProp,
+  ...props
+} = Astro.props;
+
+let className = "";
+
+if (isIconOnly) {
+  className = cn(className, "p-2.5 sm:p-3 rounded-full");
+} else {
+  className = cn(className, "inline-flex items-center rounded-lg");
+}
+
+if (variant === "solid")
+  className = cn(
+    "px-4 sm:px-6 py-2.5 sm:py-3 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-sm sm:text-base transition-colors shadow-lg hover:shadow-xl",
+    className,
+  );
+else if (variant === "link")
+  className = cn(
+    "flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors",
+    className,
+  );
+else if (variant === "hoverEffect")
+  className = cn(
+    "group gap-2 px-6 py-3 bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 hover:border-violet-300 dark:hover:border-violet-500 hover:bg-violet-50 dark:hover:bg-violet-900/20 transition-all duration-300 shadow-sm hover:shadow-md",
+    className,
+  );
+---
+
+<a
+  href={href}
+  download={download}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={cn(className, classNameProp)}
+  {...props}
+>
+  <slot />
+</a>

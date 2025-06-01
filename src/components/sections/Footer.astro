@@ -1,0 +1,66 @@
+---
+import { Heart } from "lucide-astro";
+import Link from "../ui/Link.astro";
+import { socialLinks } from "@/data/social-links";
+---
+
+<footer
+  class="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-8">
+      <div class="md:col-span-4 space-y-4">
+        <div class="text-xl font-bold text-zinc-900 dark:text-white">
+          Fabian <span class="text-violet-600 dark:text-violet-400">Vargas</span
+          >
+        </div><p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-xl">
+          Soy un apasionado de construir con arquitecturas modernas y la
+          escalabilidad. Amo la Programación Orientada a Objetos, los principios
+          SOLID y el Clean Code. Experimentado con React, TypeScript, Node.js y
+          frameworks backend de NodeJs.
+        </p>
+      </div><div class="md:col-span-2 md:pl-12">
+        <h3
+          class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider mb-4"
+        >
+          Información de contacto
+        </h3><ul class="space-y-2">
+          {
+            socialLinks.map(({ external, href, icon: Icon, label }) => (
+              <li>
+                <Link
+                  href={href}
+                  variant="link"
+                  target={external ? "_blank" : undefined}
+                  aria-label={label}
+                >
+                  <Icon class="w-4 h-4" />
+                  {label}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div><div class="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+      <!-- <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
+        ©2025 Fabian Vargas. Todos los derechos reservados.
+      </p> -->
+      <p
+        class="text-center text-sm text-zinc-500 dark:text-zinc-500 mt-2 flex items-center justify-center"
+      >
+        Hecho con
+        <Heart class="w-4 h-4 mx-1 text-red-500" /> &
+        <Link
+          variant="link"
+          target="_blank"
+          href="https://astro.build"
+          class="ml-1"
+        >
+          Astro
+          <img src="/icons/skills/astro.svg" alt="Astro Icon" class="w-8 h-8" />
+        </Link>
+      </p>
+    </div>
+  </div>
+</footer>
