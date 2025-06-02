@@ -1,0 +1,244 @@
+---
+import { Mail, Linkedin, Send, Copy, Github } from "lucide-astro";
+
+interface Props {
+  email?: string;
+  linkedin?: string;
+  github?: string;
+  linkedinUsername?: string;
+  githubUsername?: string;
+  description?: string;
+  footerText?: string;
+}
+
+const {
+  email = "fabidev18@gmail.com",
+  linkedin = "https://www.linkedin.com/in/fabian-va/",
+  github = "https://github.com/FabiSax12",
+  linkedinUsername = "@fabian-va",
+  githubUsername = "@FabiSax12",
+  description = "Si deseas ponerte en contacto conmigo, puedes utilizar los siguientes métodos:",
+  footerText = "Si tienes alguna pregunta o deseas colaborar, no dudes en contactarme. Estoy aquí para ayudarte y responder a tus inquietudes."
+} = Astro.props;
+
+const contactMethods = [
+  {
+    icon: Mail,
+    title: "Email",
+    value: email,
+    displayValue: email,
+    copyValue: email,
+    href: `mailto:${email}`,
+    color: "text-violet-600 dark:text-violet-400"
+  },
+  {
+    icon: Linkedin,
+    title: "LinkedIn",
+    value: linkedinUsername,
+    displayValue: linkedinUsername,
+    copyValue: linkedinUsername,
+    href: linkedin,
+    color: "text-blue-600 dark:text-blue-400"
+  },
+  {
+    icon: Github,
+    title: "GitHub",
+    value: githubUsername,
+    displayValue: githubUsername,
+    copyValue: githubUsername,
+    href: github,
+    color: "text-gray-700 dark:text-gray-300"
+  }
+];
+---
+
+<div class="p-6 space-y-6">
+  <!-- Description -->
+  <p class="text-zinc-600 dark:text-zinc-300 text-center pb-2">
+    {description}
+  </p>
+
+  <!-- Contact Methods -->
+  <div class="space-y-4">
+    {contactMethods.map((method) => (
+      <div class="bg-zinc-50/90 dark:bg-zinc-900/70 rounded-lg p-4 sm:p-4 border border-zinc-200 dark:border-zinc-700 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 contact-item">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center">
+            <method.icon class={`w-5 h-5 ${method.color} mr-2`} />
+            <span class="font-medium text-zinc-900 dark:text-white">
+              {method.title}
+            </span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-3 sm:gap-2">
+          <a
+            href={method.href}
+            target={method.href.startsWith('mailto:') ? undefined : "_blank"}
+            rel={method.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+            class="text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex-1 truncate"
+          >
+            {method.displayValue}
+          </a>
+
+          <div class="flex items-center gap-2 ml-0 sm:ml-2 w-full sm:w-auto justify-between sm:justify-end">
+            <!-- Copy Button -->
+            <button
+              class="copy-btn relative overflow-hidden p-1.5 rounded-lg bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-700 dark:text-zinc-300 transition-all duration-200 hover:scale-105 active:scale-95 before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:bg-white/20 before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 active:before:w-10 active:before:h-10"
+              aria-label={`Copiar ${method.title.toLowerCase()}`}
+              data-copy-text={method.copyValue}
+              data-copy-type={method.title.toLowerCase()}
+            >
+              <Copy class="w-4 h-4 copy-icon" />
+              <!-- Success icon (hidden by default) -->
+              <svg class="w-4 h-4 success-icon hidden text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </button>
+
+            <!-- Action Button -->
+            <a
+              href={method.href}
+              target={method.href.startsWith('mailto:') ? undefined : "_blank"}
+              rel={method.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+              class="relative overflow-hidden p-1.5 rounded-lg bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-700 dark:text-zinc-300 transition-all duration-200 hover:scale-105 active:scale-95 before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:bg-white/20 before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 active:before:w-10 active:before:h-10"
+              aria-label={`Abrir ${method.title.toLowerCase()}`}
+            >
+              <Send class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-700 text-center">
+    <p class="text-zinc-500 dark:text-zinc-400 text-sm">
+      {footerText}
+    </p>
+  </div>
+</div>
+
+<script>
+import { cn } from "@/lib/utils";
+
+  declare global {
+    interface Window {
+      contactInfoInstance?: ContactInfo;
+    }
+  }
+
+  class ContactInfo {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.setupCopyButtons();
+    }
+
+    setupCopyButtons() {
+      const copyButtons = document.querySelectorAll<HTMLButtonElement>('.copy-btn');
+
+      copyButtons.forEach(button => {
+        button.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          const textToCopy = button.dataset.copyText;
+          const copyType = button.dataset.copyType;
+
+          if (!textToCopy) {
+            console.error('No text to copy');
+            this.showErrorAnimation(button);
+            return;
+          }
+
+          try {
+            await this.copyToClipboard(textToCopy);
+            this.showSuccessAnimation(button);
+          } catch (error) {
+            this.showErrorAnimation(button);
+            console.error('Error al copiar:', error);
+          }
+        });
+      });
+    }
+
+    async copyToClipboard(text: string): Promise<void> {
+      // Check if Clipboard API is available
+      if (!navigator.clipboard) {
+        throw new Error('Clipboard API not supported');
+      }
+
+      // Check if we're in a secure context (HTTPS or localhost)
+      if (!window.isSecureContext) {
+        throw new Error('Clipboard API requires a secure context (HTTPS)');
+      }
+
+      try {
+        // Use the modern Clipboard API
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        // If the modern API fails, throw the error
+        throw new Error(`Failed to copy text: ${error}`);
+      }
+    }
+
+    showSuccessAnimation(button: HTMLButtonElement) {
+      const copyIcon = button.querySelector<SVGElement>('.copy-icon');
+      const successIcon = button.querySelector<SVGElement>('.success-icon');
+
+      // Show success state
+      copyIcon?.classList.add('hidden');
+      successIcon?.classList.remove('hidden');
+      const oldClassList = button.classList.toString();
+      button.classList.value = cn(
+        oldClassList,
+        'bg-green-100',
+        'dark:bg-green-900',
+        'text-green-700',
+        'dark:text-green-300'
+      );
+
+      // Reset after animation
+      setTimeout(() => {
+        copyIcon?.classList.remove('hidden');
+        successIcon?.classList.add('hidden');
+        button.classList.value = oldClassList;
+      }, 1500);
+    }
+
+    showErrorAnimation(button: HTMLButtonElement) {
+      const oldClassList = button.classList.toString();
+
+      // Add error colors
+      button.classList = cn(oldClassList, 'bg-red-100', 'dark:bg-red-900', 'text-red-700', 'dark:text-red-300');
+      button.classList.add('animate-shake');
+
+      setTimeout(() => {
+        button.classList.remove('animate-shake');
+        button.classList = oldClassList;
+      }, 1000);
+    }
+  }
+
+  // Initialize contact info functionality
+  function initContactInfo() {
+    if (!window.contactInfoInstance) {
+      window.contactInfoInstance = new ContactInfo();
+    }
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactInfo);
+  } else {
+    initContactInfo();
+  }
+
+  // Re-initialize on page changes
+  document.addEventListener('astro:page-load', initContactInfo);
+</script>
