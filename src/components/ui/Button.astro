@@ -1,7 +1,41 @@
+---
+import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+  isDialogTrigger?: boolean;
+  dialogId?: string;
+}
+
+const {
+  class: className,
+  dialogId,
+  isDialogTrigger = false,
+  ...props
+} = Astro.props;
+---
+
 <button
-  class="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm sm:text-base transition-colors cursor-pointer shadow-lg hover:shadow-xl"
+  class={cn(
+    "inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-sm sm:text-base transition-colors cursor-pointer shadow-lg hover:shadow-xl",
+    className,
+  )}
+  id={isDialogTrigger ? `trigger-dialog-${dialogId}` : undefined}
+  {...props}
 >
   <slot name="start" />
   <slot />
   <slot name="end" />
 </button>
+
+<script is:inline define:vars={{ dialogId, isDialogTrigger }}>
+  if (isDialogTrigger) {
+    const triggerButton = document.getElementById(`trigger-dialog-${dialogId}`);
+    triggerButton.addEventListener("click", () => {
+      if (window[`openDialog${dialogId}`]) {
+        console.log(`Opening dialog with ID: ${dialogId}`);
+        window[`openDialog${dialogId}`]();
+      }
+    });
+  }
+</script>
