@@ -1,7 +1,14 @@
 ---
-const acceptLanguage = Astro.request.headers.get("accept-language");
-const preferredLang = acceptLanguage?.includes("en") ? "en" : "es";
-
-return Astro.redirect(`/es`);
-return Astro.redirect(`/${preferredLang}`);
+import MainLayout from "@/layouts/MainLayout.astro";
+import Hero from "@/components/sections/Hero.astro";
+import TechStack from "@/components/sections/TechStack.astro";
+import ContactDialog from "@/components/contact-dialog/ContactDialog.astro";
+import BuildingMessage from "@/components/sections/BuildingMessage.astro";
 ---
+
+<MainLayout>
+	<Hero />
+	<TechStack />
+	<ContactDialog />
+	<BuildingMessage />
+</MainLayout>
