@@ -1,0 +1,95 @@
+---
+import { GraduationCap, BookOpen, Award, Clock } from "lucide-astro";
+import ProgressStats from "../university-progress/ProgressStats.astro";
+import CourseCategory from "../university-progress/CourseCategory.astro";
+import {
+  universityProgress,
+  getProgressStats,
+} from "@/data/university-progress";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Progreso Universitario",
+  subtitle = "Ingeniería en Computación",
+} = Astro.props;
+
+const stats = getProgressStats();
+---
+
+<section class="opacity-0 py-20 animate-fade-in-up">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-6">
+        <div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+          <GraduationCap class="w-8 h-8 text-violet-600 dark:text-violet-400" />
+        </div>
+      </div>
+
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+      >
+        {title}
+      </h2>
+
+      <p class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6">
+        {subtitle}
+      </p>
+
+      <p
+        class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed"
+      >
+        Mi trayectoria académica en Ingeniería en Computación, mostrando las
+        materias completadas, en curso y por cursar. Cada área representa un
+        aspecto fundamental de mi formación profesional.
+      </p>
+    </div>
+
+    <!-- Progress Overview -->
+    <ProgressStats stats={stats} />
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
+      {
+        universityProgress.map((category, index) => (
+          <CourseCategory category={category} index={index} />
+        ))
+      }
+    </div>
+
+    <!-- Legend -->
+    <div
+      class="mt-16 p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700"
+    >
+      <h3
+        class="text-lg font-semibold text-zinc-900 dark:text-white mb-4 text-center"
+      >
+        Estado de las Materias
+      </h3>
+
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400"
+            >Completada</span
+          >
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">En Curso</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Pendiente</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
