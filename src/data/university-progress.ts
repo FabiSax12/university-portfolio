@@ -16,6 +16,7 @@ export interface CourseCategory {
     secondary: string;
     bg: string;
     border: string;
+    progressBar: string;
   };
 }
 
@@ -27,7 +28,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-blue-600 dark:text-blue-400",
       secondary: "text-blue-500",
       bg: "bg-blue-50 dark:bg-blue-900/20",
-      border: "border-blue-200 dark:border-blue-700"
+      border: "border-blue-200 dark:border-blue-700",
+      progressBar: 'to-blue-900/70 from-blue-400/70 dark:from-blue-900/70 dark:to-blue-400/70'
     },
     courses: [
       { name: "Introducción a la Programación", status: 'completed', credits: 3 },
@@ -45,7 +47,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-purple-600 dark:text-purple-400",
       secondary: "text-purple-500",
       bg: "bg-purple-50 dark:bg-purple-900/20",
-      border: "border-purple-200 dark:border-purple-700"
+      border: "border-purple-200 dark:border-purple-700",
+      progressBar: 'to-purple-900/70 from-purple-400/70 dark:from-purple-900/70 dark:to-purple-400/70'
     },
     courses: [
       { name: "Análisis de Algoritmos", status: 'current', credits: 4 },
@@ -64,7 +67,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-green-600 dark:text-green-400",
       secondary: "text-green-500",
       bg: "bg-green-50 dark:bg-green-900/20",
-      border: "border-green-200 dark:border-green-700"
+      border: "border-green-200 dark:border-green-700",
+      progressBar: 'to-green-900/70 from-green-400/70 dark:from-green-900/70 dark:to-green-400/70'
     },
     courses: [
       { name: "Requerimientos de Software", status: 'current', credits: 4 },
@@ -83,7 +87,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-orange-600 dark:text-orange-400",
       secondary: "text-orange-500",
       bg: "bg-orange-50 dark:bg-orange-900/20",
-      border: "border-orange-200 dark:border-orange-700"
+      border: "border-orange-200 dark:border-orange-700",
+      progressBar: 'to-orange-900/70 from-orange-400/70 dark:from-orange-900/70 dark:to-orange-400/70'
     },
     courses: [
       { name: "Bases de Datos 1", status: 'current', credits: 4 },
@@ -97,7 +102,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-cyan-600 dark:text-cyan-400",
       secondary: "text-cyan-500",
       bg: "bg-cyan-50 dark:bg-cyan-900/20",
-      border: "border-cyan-200 dark:border-cyan-700"
+      border: "border-cyan-200 dark:border-cyan-700",
+      progressBar: 'to-cyan-900/70 from-cyan-400/70 dark:from-cyan-900/70 dark:to-cyan-400/70'
     },
     courses: [
       { name: "Electiva 1", status: 'pending', credits: 3 },
@@ -111,7 +117,8 @@ export const universityProgress: CourseCategory[] = [
       primary: "text-violet-600 dark:text-violet-400",
       secondary: "text-violet-500",
       bg: "bg-violet-50 dark:bg-violet-900/20",
-      border: "border-violet-200 dark:border-violet-700"
+      border: "border-violet-200 dark:border-violet-700",
+      progressBar: 'to-violet-900/70 from-violet-400/70 dark:from-violet-900/70 dark:to-violet-400/70'
     },
     courses: [
       { name: "Práctica Profesional", status: 'pending', credits: 12 }

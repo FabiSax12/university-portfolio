@@ -68,7 +68,7 @@ console.log(category.color.primary)
         <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-2">
 
           <div
-            class={`bg-gradient-to-r h-2 rounded-full transition-all duration-1000 ease-out` + ' ' + progressBarColorFrom + ' ' + progressBarColorTo}
+            class={`bg-gradient-to-r ${category.color.progressBar} h-2 rounded-full transition-all duration-1000 ease-out`}
             style={`width: ${progress.percentage}%`}
           ></div>
         </div>
