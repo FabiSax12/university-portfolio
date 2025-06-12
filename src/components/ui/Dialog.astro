@@ -9,16 +9,15 @@ interface Props {
 const { id, title } = Astro.props;
 ---
 
-<div
+<!-- <div
   id={`dialog-backdrop-${id}`}
-  class="hidden absolute inset-0 z-50 bg-black/40 animate-in duration-300 fade-in-0 backdrop-blur-xl"
+  class="hidden fixed inset-0 w-dvw h-dvh z-50 bg-black/40 animate-in duration-300 fade-in-0 backdrop-blur-xl overflow-hidden"
   aria-hidden="true"
 >
-</div>
-
+</div> -->
 <dialog
   id={`dialog-${id}`}
-  class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[100] bg-white dark:bg-zinc-800/95 rounded-xl shadow-2xl max-w-md w-full animate-fade-in-up opacity-0"
+  class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-[100] bg-white dark:bg-zinc-800/95 rounded-xl shadow-2xl w-dvw sm:max-w-md animate-fade-in-up opacity-0"
   aria-labelledby={`dialog-title-${id}`}
   aria-modal="true"
 >

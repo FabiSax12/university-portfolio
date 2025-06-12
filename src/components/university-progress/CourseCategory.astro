@@ -1,0 +1,170 @@
+---
+import { ChevronDown } from "lucide-astro";
+import CourseCard from "./CourseCard.astro";
+import { getCategoryProgress } from "@/data/university-progress";
+import type { CourseCategory } from "@/data/university-progress";
+
+interface Props {
+  category: CourseCategory;
+  index: number;
+}
+
+const { category, index } = Astro.props;
+const progress = getCategoryProgress(category);
+const progressBarColorFrom = category.color.primary.replace('text-', 'from-').replace('dark:text-', 'dark:from-');
+const progressBarColorTo = category.color.secondary.replace('text-', 'to-').replace('dark:text-', 'dark:to-');
+
+
+console.log(category.color.primary)
+---
+
+<div>
+  <div class={`${category.color.bg} rounded-2xl border ${category.color.border} overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}>
+    <!-- Header -->
+    <div class="p-6 border-b border-current/10">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <div class={`p-2 bg-white/50 dark:bg-black/20 rounded-lg`}>
+            {typeof category.icon === 'string'
+            ? category.icon.includes('.svg') ? (
+              <img
+                src={category.icon}
+                alt={`${category.name} icon`}
+                class={`w-6 h-6 ${category.color.primary}`}
+              />
+           ) : (
+              <div class={`w-6 h-6 ${category.color.primary}`}>
+                <!-- Fallback icon placeholder -->
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
+              </div>
+            ) : (
+              <category.icon class={`w-6 h-6 ${category.color.primary}`} />
+            )}
+          </div>
+          <div>
+            <h3 class={`font-bold text-lg ${category.color.primary}`}>
+              {category.name}
+            </h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">
+              {progress.completed} de {progress.total} materias
+            </p>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <div class={`text-2xl font-bold ${category.color.primary}`}>
+            {progress.percentage}%
+          </div>
+          <div class="text-sm text-zinc-500 dark:text-zinc-400">
+            completado
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="space-y-2">
+        <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-2">
+
+          <div
+            class={`bg-gradient-to-r ${category.color.progressBar} h-2 rounded-full transition-all duration-1000 ease-out`}
+            style={`width: ${progress.percentage}%`}
+          ></div>
+        </div>
+
+        <div class="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+          <span>{progress.completed} completadas</span>
+          <span>{progress.current} en curso</span>
+          <span>{progress.pending} pendientes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses List -->
+    <div class="p-6">
+      <!-- Toggle Button -->
+      <button
+        class={`w-full flex items-center justify-between p-3 rounded-lg bg-white/50 dark:bg-black/20 hover:bg-white/70 dark:hover:bg-black/30 transition-colors mb-4 course-toggle`}
+        data-category={`category-${index}`}
+        aria-expanded="false"
+        aria-controls={`courses-${index}`}
+      >
+        <span class={`font-medium ${category.color.primary}`}>
+          Ver Materias ({category.courses.length})
+        </span>
+        <ChevronDown class={`w-5 h-5 ${category.color.primary} transition-transform duration-300 toggle-icon`} />
+      </button>
+
+      <!-- Courses Grid -->
+      <div
+        id={`courses-${index}`}
+        class="courses-container max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+      >
+        <div class="grid grid-cols-1 gap-3 pt-2">
+          {category.courses.map((course) => (
+            <CourseCard
+              course={course}
+              categoryColor={category.color}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script lang="js">
+  class CourseToggle {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      const toggleButtons = document.querySelectorAll('.course-toggle');
+
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.toggleCourses(button);
+        });
+      });
+    }
+
+    toggleCourses(button) {
+      const categoryId = button.dataset.category;
+      const coursesContainer = button.nextElementSibling;
+      const icon = button.querySelector('.toggle-icon');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Collapse
+        coursesContainer.style.maxHeight = '0px';
+        icon.style.transform = 'rotate(0deg)';
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        // Expand
+        const scrollHeight = coursesContainer.scrollHeight;
+        coursesContainer.style.maxHeight = `${scrollHeight}px`;
+        icon.style.transform = 'rotate(180deg)';
+        button.setAttribute('aria-expanded', 'true');
+      }
+    }
+  }
+
+  // Initialize course toggles
+  function initCourseToggles() {
+    if (!window.courseToggleInstance) {
+      window.courseToggleInstance = new CourseToggle();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCourseToggles);
+  } else {
+    initCourseToggles();
+  }
+
+  // Re-initialize on page changes (for Astro)
+  document.addEventListener('astro:page-load', initCourseToggles);
+</script>
