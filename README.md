@@ -1,47 +1,56 @@
-# Astro Starter Kit: Minimal
+# 💼 Personal Portfolio
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+My personal portfolio website showcasing my journey as a Computer Engineering student and Full Stack Developer.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+[![Live Site](https://img.shields.io/badge/Live_Site-Visit-blue?style=for-the-badge)](https://fabian-vargas.dev)
+[![Astro](https://img.shields.io/badge/Astro-5.0-orange?style=for-the-badge&logo=astro)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-cyan?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 About
 
-## 🚀 Project Structure
+A modern, responsive portfolio built with cutting-edge web technologies. Features my projects, technical skills, university progress, and professional experience.
 
-Inside of your Astro project, you'll see the following folders and files:
+**Key Highlights:**
+- 🎨 Modern design with dark/light theme support
+- ⚡ 98+ Lighthouse performance score
+- 📱 Fully responsive across all devices
+- 🎯 Interactive project showcases with real metrics
+- 📊 University progress tracking
+- ✨ Smooth animations and micro-interactions
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🛠️ Built With
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **[Astro](https://astro.build/)** - Static site generator for blazing-fast performance
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first styling
+- **[React](https://reactjs.org/)** - Interactive components
+- **[Framer Motion](https://www.framer.com/motion/)** - Smooth animations
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 📊 Performance
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **Lighthouse Score:** 98/100
+- **Load Time:** < 2.1s
+- **Zero Layout Shift** (CLS: 0)
+- **Mobile Optimized** with perfect responsive design
 
-## 🧞 Commands
+## 🌐 Sections
 
-All commands are run from the root of the project, from a terminal:
+- **Hero** - Introduction with call-to-action
+- **Tech Stack** - Interactive carousel of technologies
+- **Projects** - Featured work with metrics and live demos
+- **University Progress** - Academic journey tracking
+- **Contact** - Multiple ways to get in touch
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 📞 Contact
 
-## 👀 Want to learn more?
+- **Website:** [fabian-vargas.dev](https://fabian-vargas.dev)
+- **Email:** [fabidev18@gmail.com](mailto:fabidev18@gmail.com)
+- **LinkedIn:** [@fabian-va](https://linkedin.com/in/fabian-va)
+- **GitHub:** [@FabiSax12](https://github.com/FabiSax12)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+<div align="center">
+Made with ❤️ and ☕ by Fabian Vargas
+</div>
