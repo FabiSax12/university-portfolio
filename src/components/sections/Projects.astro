@@ -1,0 +1,293 @@
+---
+import {
+  Code2,
+  Rocket,
+  Target,
+  TrendingUp,
+  Github,
+  ExternalLink,
+} from "lucide-astro";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import Link from "@/components/ui/Link.astro";
+import {
+  projects,
+  getFeaturedProjects,
+  getProjectStats,
+} from "@/data/projects";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  showAll?: boolean;
+}
+
+const {
+  title = "Proyectos Destacados",
+  subtitle = "Soluciones reales que demuestran mi experiencia técnica",
+  showAll = false,
+} = Astro.props;
+
+const featuredProjects = getFeaturedProjects();
+const displayProjects = showAll ? projects : featuredProjects;
+const stats = getProjectStats();
+---
+
+<section class="opacity-0 py-20 animate-fade-in-up">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-6">
+        <div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+          <Code2 class="w-8 h-8 text-violet-600 dark:text-violet-400" />
+        </div>
+      </div>
+
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+      >
+        {title}
+      </h2>
+
+      <p class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6">
+        {subtitle}
+      </p>
+
+      <p
+        class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed mb-8"
+      >
+        Cada proyecto refleja mi enfoque en resolver problemas reales con
+        soluciones técnicas elegantes. Me concentro en escribir código limpio,
+        escalable y bien documentado que genere valor real para usuarios y
+        negocios.
+      </p>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-violet-600 dark:text-violet-400">
+            {stats.completed}
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            Completados
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            {stats.inProgress}
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            En desarrollo
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-2xl font-bold text-green-600 dark:text-green-400">
+            {stats.techCount}+
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            Tecnologías
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-2xl font-bold text-orange-600 dark:text-orange-400">
+            {stats.completionRate}%
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            Tasa de éxito
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What Makes My Projects Stand Out -->
+    <div class="mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div
+          class="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl p-6 border border-violet-200 dark:border-violet-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-violet-200 dark:bg-violet-800 rounded-lg">
+              <Target class="w-5 h-5 text-violet-600 dark:text-violet-400" />
+            </div>
+            <h3 class="font-semibold text-violet-900 dark:text-violet-100">
+              Orientado a Problemas
+            </h3>
+          </div>
+          <p
+            class="text-sm text-violet-700 dark:text-violet-300 leading-relaxed"
+          >
+            Cada proyecto nace de un problema real. Primero entiendo el contexto
+            de negocio y luego elijo la tecnología más adecuada.
+          </p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-blue-200 dark:bg-blue-800 rounded-lg">
+              <Rocket class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h3 class="font-semibold text-blue-900 dark:text-blue-100">
+              Producción Ready
+            </h3>
+          </div>
+          <p class="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
+            Tests, documentación, CI/CD, monitoreo. Mis proyectos están listos
+            para escalar en producción, no son solo demos.
+          </p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-green-200 dark:bg-green-800 rounded-lg">
+              <TrendingUp class="w-5 h-5 text-green-600 dark:text-green-400" />
+            </div>
+            <h3 class="font-semibold text-green-900 dark:text-green-100">
+              Impacto Medible
+            </h3>
+          </div>
+          <p class="text-sm text-green-700 dark:text-green-300 leading-relaxed">
+            Incluyo métricas reales: performance, conversión, tiempo de
+            desarrollo. El código debe generar valor tangible.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="space-y-8">
+      <!-- Featured Project (if exists) -->
+      {
+        featuredProjects.length > 0 && (
+          <div>
+            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
+              <span>🌟</span>
+              Proyecto Destacado
+            </h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <ProjectCard project={featuredProjects[0]} featured={true} />
+            </div>
+          </div>
+        )
+      }
+
+      <!-- Other Projects -->
+      {
+        displayProjects.length > 1 && (
+          <div>
+            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
+              <span>🚀</span>
+              {showAll ? "Todos los Proyectos" : "Otros Proyectos"}
+            </h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {displayProjects.slice(1).map((project) => (
+                <ProjectCard project={project} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-16 text-center">
+      <div
+        class="bg-gradient-to-r from-violet-50 to-zinc-50 dark:from-violet-950/30 dark:to-zinc-900 rounded-2xl p-8 border border-violet-200 dark:border-violet-800"
+      >
+        <div class="max-w-2xl mx-auto space-y-6">
+          <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">
+            ¿Interesado en colaborar?
+          </h3>
+
+          <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            Estoy siempre abierto a nuevos desafíos técnicos y oportunidades de
+            crear soluciones impactantes. Si tienes un proyecto en mente o
+            quieres ver más de mi trabajo, no dudes en contactarme.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4">
+            <Link
+              href="https://github.com/FabiSax12"
+              variant="hoverEffect"
+              class="group"
+            >
+              <Github class="w-4 h-4 mr-2" />
+              Ver más en GitHub
+              <ExternalLink
+                class="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </Link>
+
+            <Link href="mailto:fabidev18@gmail.com" variant="solid">
+              Conversemos sobre tu proyecto
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Philosophy -->
+    <div class="mt-16">
+      <div
+        class="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-8 border border-zinc-200 dark:border-zinc-700"
+      >
+        <h3
+          class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 text-center"
+        >
+          💭 Mi Filosofía de Desarrollo
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-zinc-900 dark:text-white mb-2">
+                🎯 Código con Propósito
+              </h4>
+              <p class="text-zinc-600 dark:text-zinc-400">
+                Cada línea de código debe resolver un problema específico. No
+                escribo código por escribir.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-medium text-zinc-900 dark:text-white mb-2">
+                🧪 Test-Driven
+              </h4>
+              <p class="text-zinc-600 dark:text-zinc-400">
+                Los tests no son opcionales. Desarrollo con TDD para asegurar
+                calidad desde el día uno.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-zinc-900 dark:text-white mb-2">
+                📚 Documentación Viva
+              </h4>
+              <p class="text-zinc-600 dark:text-zinc-400">
+                La documentación debe evolucionar con el código. README
+                completos y APIs autodocumentadas.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-medium text-zinc-900 dark:text-white mb-2">
+                🔄 Iteración Continua
+              </h4>
+              <p class="text-zinc-600 dark:text-zinc-400">
+                Prefiero entregar valor rápido e iterar basado en feedback real
+                de usuarios.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

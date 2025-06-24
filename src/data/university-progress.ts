@@ -51,7 +51,7 @@ export const universityProgress: CourseCategory[] = [
       progressBar: 'to-purple-900/70 from-purple-400/70 dark:from-purple-900/70 dark:to-purple-400/70'
     },
     courses: [
-      { name: "Análisis de Algoritmos", status: 'current', credits: 4 },
+      { name: "Análisis de Algoritmos", status: 'completed', credits: 4 },
       { name: "Lenguajes de Programación", status: 'pending', credits: 4 },
       { name: "Compiladores e Intérpretes", status: 'pending', credits: 4 },
       { name: "Principios de Sistemas Operativos", status: 'pending', credits: 4 },
@@ -71,7 +71,7 @@ export const universityProgress: CourseCategory[] = [
       progressBar: 'to-green-900/70 from-green-400/70 dark:from-green-900/70 dark:to-green-400/70'
     },
     courses: [
-      { name: "Requerimientos de Software", status: 'current', credits: 4 },
+      { name: "Requerimientos de Software", status: 'completed', credits: 4 },
       { name: "Diseño de Software", status: 'pending', credits: 4 },
       { name: "Administración de Proyectos", status: 'pending', credits: 4 },
       { name: "Aseguramiento de la Calidad de Software", status: 'pending', credits: 3 },
@@ -91,7 +91,7 @@ export const universityProgress: CourseCategory[] = [
       progressBar: 'to-orange-900/70 from-orange-400/70 dark:from-orange-900/70 dark:to-orange-400/70'
     },
     courses: [
-      { name: "Bases de Datos 1", status: 'current', credits: 4 },
+      { name: "Bases de Datos 1", status: 'completed', credits: 4 },
       { name: "Bases de Datos 2", status: 'pending', credits: 3 }
     ]
   },
