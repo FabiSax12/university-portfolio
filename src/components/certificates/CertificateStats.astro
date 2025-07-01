@@ -1,0 +1,146 @@
+---
+import { Award, Zap, Users, BookOpen } from "lucide-astro";
+
+interface Props {
+  stats: {
+    total: number;
+    active: number;
+    lifetime: number;
+    expired: number;
+    uniqueSkills: number;
+    issuers: number;
+  };
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <!-- Total Certificados -->
+  <div
+    class="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl p-6 border border-violet-200 dark:border-violet-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <div class="p-2 bg-violet-100 dark:bg-violet-800/50 rounded-lg">
+        <Award class="w-6 h-6 text-violet-600 dark:text-violet-400" />
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-bold text-violet-600 dark:text-violet-400">
+          {stats.total}
+        </div>
+        <div class="text-sm text-violet-600/70 dark:text-violet-400/70">
+          certificados
+        </div>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-zinc-900 dark:text-white">Total</h3>
+      <div class="w-full bg-violet-200 dark:bg-violet-800 rounded-full h-2">
+        <div
+          class="bg-gradient-to-r from-violet-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
+          style="width: 100%"
+        >
+        </div>
+      </div>
+      <p class="text-xs text-zinc-600 dark:text-zinc-400">
+        Certificaciones obtenidas
+      </p>
+    </div>
+  </div>
+
+  <!-- Certificados Activos -->
+  <div
+    class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <div class="p-2 bg-green-100 dark:bg-green-800/50 rounded-lg">
+        <Zap class="w-6 h-6 text-green-600 dark:text-green-400" />
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-bold text-green-600 dark:text-green-400">
+          {stats.active + stats.lifetime}
+        </div>
+        <div class="text-sm text-green-600/70 dark:text-green-400/70">
+          vigentes
+        </div>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-zinc-900 dark:text-white">Vigentes</h3>
+      <div class="w-full bg-green-200 dark:bg-green-800 rounded-full h-2">
+        <div
+          class="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-out"
+          style={`width: ${((stats.active + stats.lifetime) / stats.total) * 100}%`}
+        >
+        </div>
+      </div>
+      <p class="text-xs text-zinc-600 dark:text-zinc-400">
+        {stats.lifetime} permanentes, {stats.active} con expiración
+      </p>
+    </div>
+  </div>
+
+  <!-- Habilidades -->
+  <div
+    class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <div class="p-2 bg-blue-100 dark:bg-blue-800/50 rounded-lg">
+        <BookOpen class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+          {stats.uniqueSkills}
+        </div>
+        <div class="text-sm text-blue-600/70 dark:text-blue-400/70">
+          habilidades
+        </div>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-zinc-900 dark:text-white">Habilidades</h3>
+      <div class="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
+        <div
+          class="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-out"
+          style="width: 85%"
+        >
+        </div>
+      </div>
+      <p class="text-xs text-zinc-600 dark:text-zinc-400">
+        Tecnologías certificadas
+      </p>
+    </div>
+  </div>
+
+  <!-- Proveedores -->
+  <div
+    class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <div class="p-2 bg-amber-100 dark:bg-amber-800/50 rounded-lg">
+        <Users class="w-6 h-6 text-amber-600 dark:text-amber-400" />
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-bold text-amber-600 dark:text-amber-400">
+          {stats.issuers}
+        </div>
+        <div class="text-sm text-amber-600/70 dark:text-amber-400/70">
+          proveedores
+        </div>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-zinc-900 dark:text-white">Proveedores</h3>
+      <div class="w-full bg-amber-200 dark:bg-amber-800 rounded-full h-2">
+        <div
+          class="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full transition-all duration-1000 ease-out"
+          style="width: 90%"
+        >
+        </div>
+      </div>
+      <p class="text-xs text-zinc-600 dark:text-zinc-400">
+        Instituciones reconocidas
+      </p>
+    </div>
+  </div>
+</div>

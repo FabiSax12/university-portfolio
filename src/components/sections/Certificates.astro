@@ -1,0 +1,172 @@
+---
+import { Award, Shield, Star, Zap } from "lucide-astro";
+import CertificateStats from "../certificates/CertificateStats.astro";
+import CertificateCategory from "../certificates/CertificateCategory.astro";
+import {
+  certificatesData,
+  getCertificatesStats,
+} from "@/data/certificates";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Certificaciones",
+  subtitle = "Habilidades y conocimientos validados",
+} = Astro.props;
+
+const stats = getCertificatesStats();
+---
+
+<section class="opacity-0 py-20 animate-fade-in-up">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-6">
+        <div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+          <Award class="w-8 h-8 text-violet-600 dark:text-violet-400" />
+        </div>
+      </div>
+
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+      >
+        {title}
+      </h2>
+
+      <p class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6">
+        {subtitle}
+      </p>
+
+      <p
+        class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed"
+      >
+        Mi compromiso con el aprendizaje continuo se refleja en estas certificaciones que validan mis conocimientos técnicos. 
+        Cada certificado representa horas de estudio y práctica en tecnologías modernas y metodologías de desarrollo.
+      </p>
+    </div>
+
+    <!-- Certificate Overview Stats -->
+    <CertificateStats stats={stats} />
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
+      {
+        certificatesData.map((category, index) => (
+          <CertificateCategory category={category} index={index} />
+        ))
+      }
+    </div>
+
+    <!-- Value Proposition -->
+    <div
+      class="mt-16 p-8 bg-gradient-to-r from-violet-50 to-blue-50 dark:from-violet-950/30 dark:to-blue-950/30 rounded-2xl border border-violet-200 dark:border-violet-800"
+    >
+      <div class="text-center mb-8">
+        <h3
+          class="text-2xl font-bold text-zinc-900 dark:text-white mb-4"
+        >
+          Compromiso con la Excelencia
+        </h3>
+        <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          Estas certificaciones demuestran mi dedicación al crecimiento profesional y mi capacidad para mantenerme actualizado con las últimas tecnologías y mejores prácticas de la industria.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-full w-fit mx-auto mb-3">
+            <Shield class="w-6 h-6 text-green-600 dark:text-green-400" />
+          </div>
+          <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+            Conocimientos Validados
+          </h4>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            Habilidades verificadas por instituciones reconocidas en la industria
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full w-fit mx-auto mb-3">
+            <Star class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          </div>
+          <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+            Aprendizaje Continuo
+          </h4>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            Constantemente actualizando mis habilidades con las últimas tecnologías
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-full w-fit mx-auto mb-3">
+            <Zap class="w-6 h-6 text-amber-600 dark:text-amber-400" />
+          </div>
+          <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+            Aplicación Práctica
+          </h4>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            Conocimientos aplicados en proyectos reales y entornos de producción
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div
+      class="mt-16 p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700"
+    >
+      <h3
+        class="text-lg font-semibold text-zinc-900 dark:text-white mb-4 text-center"
+      >
+        Estado de Certificaciones
+      </h3>
+
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Permanente</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Vigente</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-amber-500 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Por vencer</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Expirado</span>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🌱</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Principiante</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-lg">📚</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Intermedio</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-lg">⭐</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Avanzado</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🏆</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">Experto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
