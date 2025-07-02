@@ -1,0 +1,273 @@
+---
+import { Briefcase, TrendingUp, Users, Clock, Target, Lightbulb } from "lucide-astro";
+import ExperienceStats from "../work-experience/ExperienceStats.astro";
+import ExperienceCard from "../work-experience/ExperienceCard.astro";
+import {
+  workExperiences,
+  getExperienceStats,
+} from "@/data/work-experience";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Experiencia Profesional",
+  subtitle = "Mi trayectoria en el mundo laboral",
+} = Astro.props;
+
+const stats = getExperienceStats();
+---
+
+<section class="opacity-0 py-20 animate-fade-in-up">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-6">
+        <div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+          <Briefcase class="w-8 h-8 text-violet-600 dark:text-violet-400" />
+        </div>
+      </div>
+
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+      >
+        {title}
+      </h2>
+
+      <p class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6">
+        {subtitle}
+      </p>
+
+      <p
+        class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed"
+      >
+        Aunque mi experiencia laboral formal está comenzando, cada oportunidad ha sido un paso importante 
+        en mi desarrollo profesional. Mi práctica me enseñó el valor del trabajo en equipo, la resolución 
+        de problemas y cómo la tecnología puede transformar procesos, motivándome a especializarme en desarrollo de software.
+      </p>
+    </div>
+
+    <!-- Experience Overview Stats -->
+    <ExperienceStats stats={stats} />
+
+    <!-- What I Bring to the Table -->
+    <div class="mt-16 mb-16">
+      <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-8 text-center">
+        Lo que Aporto como Profesional
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div
+          class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-green-200 dark:bg-green-800 rounded-lg">
+              <Target class="w-5 h-5 text-green-600 dark:text-green-400" />
+            </div>
+            <h3 class="font-semibold text-green-900 dark:text-green-100">
+              Enfoque en Resultados
+            </h3>
+          </div>
+          <p
+            class="text-sm text-green-700 dark:text-green-300 leading-relaxed"
+          >
+            Mi experiencia me enseñó a identificar problemas reales y proponer 
+            soluciones concretas que generen impacto medible en la organización.
+          </p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-blue-200 dark:bg-blue-800 rounded-lg">
+              <Users class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h3 class="font-semibold text-blue-900 dark:text-blue-100">
+              Colaboración Efectiva
+            </h3>
+          </div>
+          <p class="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
+            Trabajo bien en equipos multidisciplinarios, comunico ideas técnicas 
+            de forma clara y me adapto rápidamente a diferentes dinámicas de trabajo.
+          </p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl p-6 border border-violet-200 dark:border-violet-800"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-violet-200 dark:bg-violet-800 rounded-lg">
+              <Lightbulb class="w-5 h-5 text-violet-600 dark:text-violet-400" />
+            </div>
+            <h3 class="font-semibold text-violet-900 dark:text-violet-100">
+              Mentalidad de Crecimiento
+            </h3>
+          </div>
+          <p class="text-sm text-violet-700 dark:text-violet-300 leading-relaxed">
+            Cada experiencia es una oportunidad de aprendizaje. Me mantengo 
+            curioso, hago preguntas inteligentes y busco constantemente mejorar mis habilidades.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="space-y-8">
+      <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-8 text-center">
+        Mi Trayectoria Profesional
+      </h3>
+      
+      {workExperiences.length > 0 ? (
+        <div class="space-y-6">
+          {workExperiences.map((experience, index) => (
+            <ExperienceCard experience={experience} index={index} />
+          ))}
+        </div>
+      ) : (
+        <!-- Empty State -->
+        <div class="text-center py-16">
+          <div class="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full w-fit mx-auto mb-4">
+            <Briefcase class="w-8 h-8 text-zinc-400" />
+          </div>
+          <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
+            Construyendo mi Experiencia
+          </h3>
+          <p class="text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
+            Estoy comenzando mi carrera profesional y busco oportunidades para 
+            aplicar mis conocimientos técnicos y crecer en un entorno colaborativo.
+          </p>
+        </div>
+      )}
+    </div>
+
+    <!-- Career Transition -->
+    <div
+      class="mt-16 p-8 bg-gradient-to-r from-violet-50 to-blue-50 dark:from-violet-950/30 dark:to-blue-950/30 rounded-2xl border border-violet-200 dark:border-violet-800"
+    >
+      <div class="text-center mb-6">
+        <h3
+          class="text-2xl font-bold text-zinc-900 dark:text-white mb-4"
+        >
+          🚀 Transición hacia el Desarrollo de Software
+        </h3>
+        <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          Mi experiencia laboral, aunque no directamente en tecnología, me ha dado una perspectiva 
+          valiosa sobre cómo la tecnología puede resolver problemas reales en las organizaciones.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <h4 class="font-semibold text-zinc-900 dark:text-white">
+            🎯 Lo que me motiva en Tech
+          </h4>
+          <ul class="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <li class="flex items-start gap-2">
+              <span class="text-violet-500 mt-1">•</span>
+              <span>Crear soluciones que automaticen procesos ineficientes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-violet-500 mt-1">•</span>
+              <span>Desarrollar aplicaciones que mejoren la experiencia del usuario</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-violet-500 mt-1">•</span>
+              <span>Trabajar con equipos que valoren la innovación y el aprendizaje</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-violet-500 mt-1">•</span>
+              <span>Contribuir a proyectos con impacto positivo en las personas</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-semibold text-zinc-900 dark:text-white">
+            💪 Skills transferibles que aporto
+          </h4>
+          <ul class="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Análisis de problemas y pensamiento sistemático</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Comunicación efectiva con equipos diversos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Adaptabilidad y capacidad de aprender rápido</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 mt-1">•</span>
+              <span>Enfoque en resultados y mejora continua</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Looking Forward -->
+    <div class="mt-16">
+      <div
+        class="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-8 border border-zinc-200 dark:border-zinc-700"
+      >
+        <h3
+          class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 text-center"
+        >
+          🌟 Próximos Pasos en mi Carrera
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+          <div class="text-center">
+            <div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full w-fit mx-auto mb-3">
+              <Target class="w-6 h-6 text-violet-600 dark:text-violet-400" />
+            </div>
+            <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+              Objetivo Inmediato
+            </h4>
+            <p class="text-zinc-600 dark:text-zinc-400">
+              Conseguir mi primera posición como desarrollador junior donde pueda 
+              aplicar mis conocimientos y seguir aprendiendo de profesionales experimentados.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full w-fit mx-auto mb-3">
+              <TrendingUp class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+              Crecimiento a Mediano Plazo
+            </h4>
+            <p class="text-zinc-600 dark:text-zinc-400">
+              Especializarme en desarrollo full-stack, liderar proyectos pequeños 
+              y contribuir significativamente al éxito de mi equipo.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-full w-fit mx-auto mb-3">
+              <Lightbulb class="w-6 h-6 text-green-600 dark:text-green-400" />
+            </div>
+            <h4 class="font-semibold text-zinc-900 dark:text-white mb-2">
+              Visión a Largo Plazo
+            </h4>
+            <p class="text-zinc-600 dark:text-zinc-400">
+              Convertirme en un senior developer que mentoriza a otros, contribuye 
+              a la arquitectura de software y crea productos que impacten positivamente a los usuarios.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-zinc-600 dark:text-zinc-400 italic">
+            "Cada experiencia, sin importar cuán pequeña parezca, es un ladrillo en la construcción de una carrera sólida."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
