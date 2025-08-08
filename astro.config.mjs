@@ -11,6 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  output: 'server',
   i18n: {
     locales: ["es"],
     defaultLocale: "es",

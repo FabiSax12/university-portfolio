@@ -1,0 +1,768 @@
+---
+import {
+  Star,
+  GitFork,
+  Code2,
+  Users,
+  Calendar,
+  TrendingUp,
+  Shield,
+  Building,
+} from "lucide-astro";
+import GitHubLanguages from "./GitHubLanguages.astro";
+
+interface Props {
+  username: string;
+}
+
+const { username } = Astro.props;
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8" data-username={username}>
+  <!-- Main Stats Card -->
+  <div class="lg:col-span-2">
+    <div
+      class="bg-gradient-to-br from-zinc-50 to-gray-50 dark:from-zinc-900/50 dark:to-gray-900/50 rounded-2xl p-8 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-all duration-300"
+    >
+      <div class="flex items-center gap-4 mb-8">
+        <div class="relative">
+          <img
+            id="github-avatar"
+            class="w-20 h-20 rounded-full border-3 border-white dark:border-zinc-700 shadow-lg"
+            alt="GitHub Avatar"
+            src="/icons/skills/github2.svg"
+          />
+          <div
+            class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white dark:border-zinc-900 animate-pulse"
+          >
+          </div>
+          <!-- Private Access Indicator -->
+          <div
+            id="private-indicator"
+            class="hidden absolute -top-1 -left-1 w-6 h-6 bg-violet-500 rounded-full border-2 border-white dark:border-zinc-900 flex items-center justify-center"
+          >
+            <Shield class="w-3 h-3 text-white" />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3
+            class="text-xl font-bold text-zinc-900 dark:text-white"
+            id="github-name"
+          >
+            @{username}
+          </h3>
+          <p class="text-zinc-600 dark:text-zinc-400" id="github-bio">
+            Cargando información del perfil...
+          </p>
+          <!-- Additional Info -->
+          <div
+            class="flex items-center gap-4 mt-2 text-sm text-zinc-500 dark:text-zinc-400"
+          >
+            <div id="github-company" class="hidden flex items-center gap-1">
+              <Building class="w-4 h-4" />
+              <span></span>
+            </div>
+            <div id="github-location" class="hidden flex items-center gap-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div
+          class="text-center p-4 bg-white/50 dark:bg-black/20 rounded-xl hover:bg-white/70 dark:hover:bg-black/30 transition-colors"
+        >
+          <div class="flex items-center justify-center mb-2">
+            <Code2 class="w-5 h-5 text-blue-500" />
+          </div>
+          <div
+            class="text-2xl font-bold text-zinc-900 dark:text-white"
+            id="total-repos"
+          >
+            --
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            Repositorios
+          </div>
+          <div class="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
+            <span id="private-repos" class="hidden"
+              >+ <span></span> privados</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="text-center p-4 bg-white/50 dark:bg-black/20 rounded-xl hover:bg-white/70 dark:hover:bg-black/30 transition-colors"
+        >
+          <div class="flex items-center justify-center mb-2">
+            <Users class="w-5 h-5 text-green-500" />
+          </div>
+          <div
+            class="text-2xl font-bold text-zinc-900 dark:text-white"
+            id="followers"
+          >
+            --
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">Seguidores</div>
+          <div class="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
+            <span id="following">siguiendo --</span>
+          </div>
+        </div>
+
+        <div
+          class="text-center p-4 bg-white/50 dark:bg-black/20 rounded-xl hover:bg-white/70 dark:hover:bg-black/30 transition-colors"
+        >
+          <div class="flex items-center justify-center mb-2">
+            <Star class="w-5 h-5 text-yellow-500" />
+          </div>
+          <div
+            class="text-2xl font-bold text-zinc-900 dark:text-white"
+            id="total-stars"
+          >
+            --
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">Estrellas</div>
+          <div class="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
+            <span id="total-forks">-- forks</span>
+          </div>
+        </div>
+
+        <div
+          class="text-center p-4 bg-white/50 dark:bg-black/20 rounded-xl hover:bg-white/70 dark:hover:bg-black/30 transition-colors"
+        >
+          <div class="flex items-center justify-center mb-2">
+            <Calendar class="w-5 h-5 text-purple-500" />
+          </div>
+          <div
+            class="text-2xl font-bold text-zinc-900 dark:text-white"
+            id="join-year"
+          >
+            --
+          </div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">Desde</div>
+          <div class="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
+            <span id="years-active">-- años activo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Stats Row -->
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-700"
+      >
+        <div class="text-center">
+          <div
+            class="text-lg font-bold text-violet-600 dark:text-violet-400"
+            id="total-prs"
+          >
+            --
+          </div>
+          <div class="text-xs text-zinc-600 dark:text-zinc-400">
+            Pull Requests
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="text-lg font-bold text-orange-600 dark:text-orange-400"
+            id="total-issues"
+          >
+            --
+          </div>
+          <div class="text-xs text-zinc-600 dark:text-zinc-400">Issues</div>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="text-lg font-bold text-green-600 dark:text-green-400"
+            id="total-contributions"
+          >
+            --
+          </div>
+          <div class="text-xs text-zinc-600 dark:text-zinc-400">
+            Contribuciones
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="text-lg font-bold text-blue-600 dark:text-blue-400"
+            id="total-gists"
+          >
+            --
+          </div>
+          <div class="text-xs text-zinc-600 dark:text-zinc-400">Gists</div>
+        </div>
+      </div>
+
+      <!-- Organizations -->
+      <div
+        id="organizations-section"
+        class="hidden mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-700"
+      >
+        <h4 class="text-sm font-semibold text-zinc-900 dark:text-white mb-4">
+          Organizaciones
+        </h4>
+        <div id="organizations-list" class="flex flex-wrap gap-2">
+          <!-- Organizations will be populated here -->
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="stats-loading" class="text-center py-4">
+        <div
+          class="inline-flex items-center gap-2 text-zinc-600 dark:text-zinc-400"
+        >
+          <div
+            class="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
+          >
+          </div>
+          Cargando estadísticas avanzadas...
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="stats-error" class="hidden text-center py-4 text-red-500">
+        <p>Error al cargar las estadísticas de GitHub</p>
+        <p class="text-sm mt-1">Intentando con API pública...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Languages Card -->
+  <div class="lg:col-span-1">
+    <GitHubLanguages username={username} />
+  </div>
+</div>
+
+<!-- Enhanced GitHub Stats Island Component -->
+<script>
+  import {
+    githubConfig,
+    hasApiToken,
+    // getGitHubHeaders,
+    // getGitHubGraphQLHeaders,
+    callInternalGraphQL,
+    GITHUB_QUERIES,
+    calculateRepoScore,
+  } from "@/data/github-config";
+
+  interface GitHubUser {
+    login: string;
+    name: string;
+    bio: string;
+    avatar_url: string;
+    avatarUrl?: string;
+    public_repos: number;
+    followers: number;
+    following: number;
+    created_at: string;
+    updated_at?: string;
+    html_url: string;
+    company?: string;
+    location?: string;
+    email?: string;
+    blog?: string;
+    twitter_username?: string;
+  }
+
+  interface GitHubRepo {
+    name: string;
+    stargazers_count: number;
+    stargazerCount?: number;
+    forks_count: number;
+    forkCount?: number;
+    language: string;
+    private?: boolean;
+    isPrivate?: boolean;
+  }
+
+  interface GraphQLUserData {
+    user: {
+      name: string;
+      login: string;
+      bio: string;
+      avatarUrl: string;
+      company?: string;
+      location?: string;
+      email?: string;
+      followers: { totalCount: number };
+      following: { totalCount: number };
+      repositories: { totalCount: number };
+      repositoriesContributedTo: { totalCount: number };
+      pullRequests: { totalCount: number };
+      issues: { totalCount: number };
+      gists: { totalCount: number };
+      createdAt: string;
+      organizations: {
+        nodes: Array<{
+          name: string;
+          login: string;
+          avatarUrl: string;
+          url: string;
+        }>;
+      };
+    };
+  }
+
+  class EnhancedGitHubStats {
+    private username: string;
+    private cache: Map<string, any> = new Map();
+    private readonly CACHE_DURATION = githubConfig.cache.duration;
+    private hasToken: boolean;
+
+    constructor(username: string) {
+      this.username = username;
+      this.hasToken = true; //hasApiToken();
+      this.init();
+    }
+
+    async init() {
+      try {
+        if (this.hasToken) {
+          await this.loadEnhancedStats();
+        } else {
+          await this.loadBasicStats();
+        }
+        this.hideLoading();
+        this.showPrivateIndicator();
+      } catch (error) {
+        console.error("Error loading GitHub stats:", error);
+        // Fallback to basic stats if enhanced fails
+        if (this.hasToken) {
+          console.log("Falling back to basic API...");
+          try {
+            await this.loadBasicStats();
+            this.hideLoading();
+          } catch (fallbackError) {
+            this.showError();
+          }
+        } else {
+          this.showError();
+        }
+      }
+    }
+
+    private async fetchWithCache(
+      url: string,
+      options: RequestInit = {},
+    ): Promise<any> {
+      const cacheKey = url + JSON.stringify(options);
+      const cached = this.cache.get(cacheKey);
+
+      console.log("Fetching w cache");
+      if (cached && Date.now() - cached.timestamp < this.CACHE_DURATION) {
+        return cached.data;
+      }
+
+      try {
+        // const headers = { ...getGitHubHeaders(), ...options.headers };
+        const response = await fetch(url, { ...options });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        this.cache.set(cacheKey, { data, timestamp: Date.now() });
+        return data;
+      } catch (error) {
+        if (cached) {
+          console.warn("Using expired cache due to fetch error:", error);
+          return cached.data;
+        }
+        throw error;
+      }
+    }
+
+    async loadEnhancedStats() {
+      // Load user profile with GraphQL
+      const { data: userData }: { data: GraphQLUserData } =
+        await callInternalGraphQL(GITHUB_QUERIES.USER_PROFILE, {
+          username: this.username,
+        });
+
+      // Load repositories for star/fork count
+      const { data: reposData } = await callInternalGraphQL(
+        GITHUB_QUERIES.REPOSITORIES,
+        {
+          username: this.username,
+          first: 100,
+          after: null,
+        },
+      );
+
+      // Load contribution data
+      const now = new Date();
+      const oneYearAgo = new Date(
+        now.getFullYear() - 1,
+        now.getMonth(),
+        now.getDate(),
+      );
+
+      const { data: contributionsData } = await callInternalGraphQL(
+        GITHUB_QUERIES.CONTRIBUTIONS,
+        {
+          username: this.username,
+          from: oneYearAgo.toISOString(),
+          to: now.toISOString(),
+        },
+      );
+
+      this.updateEnhancedUserInfo(userData, reposData, contributionsData);
+    }
+
+    async loadBasicStats() {
+      console.log("Loading basic stats with REST API...");
+
+      // Load user profile
+      const user: GitHubUser = await this.fetchWithCache(
+        `/api/github?endpoint=user`,
+      );
+
+      // Load repositories for total stars calculation
+      const repos: GitHubRepo[] = await this.fetchWithCache(
+        `/api/github?endpoint=repos`,
+      );
+
+      this.updateBasicUserInfo(user, repos);
+    }
+
+    private updateEnhancedUserInfo(
+      userData: GraphQLUserData,
+      reposData: any,
+      contributionsData: any,
+    ) {
+      const user = userData.user;
+      const repos = reposData.user.repositories.nodes;
+      const contributions = contributionsData.user.contributionsCollection;
+
+      console.log(user);
+
+      // Update user info
+      this.updateUserProfile(user);
+
+      // Calculate totals
+      const totalStars = repos.reduce(
+        (sum: number, repo: any) => sum + repo.stargazerCount,
+        0,
+      );
+      const totalForks = repos.reduce(
+        (sum: number, repo: any) => sum + repo.forkCount,
+        0,
+      );
+      const privateRepos = repos.filter((repo: any) => repo.isPrivate).length;
+      const publicRepos = repos.length - privateRepos;
+
+      // Update stats
+      this.updateStats({
+        publicRepos: user.repositories.totalCount,
+        privateRepos,
+        followers: user.followers.totalCount,
+        following: user.following.totalCount,
+        totalStars,
+        totalForks,
+        totalPRs: user.pullRequests.totalCount,
+        totalIssues: user.issues.totalCount,
+        totalGists: user.gists.totalCount,
+        totalContributions:
+          contributions.contributionCalendar.totalContributions,
+        joinYear: new Date(user.createdAt).getFullYear(),
+        yearsActive:
+          new Date().getFullYear() - new Date(user.createdAt).getFullYear(),
+      });
+
+      // Update organizations
+      if (user.organizations.nodes.length > 0) {
+        this.updateOrganizations(user.organizations.nodes);
+      }
+    }
+
+    private updateBasicUserInfo(user: GitHubUser, repos: GitHubRepo[]) {
+      // Update user info
+      this.updateUserProfile(user);
+
+      const totalStars = repos.reduce(
+        (sum, repo) => sum + repo.stargazers_count,
+        0,
+      );
+      const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+      const joinYear = new Date(user.created_at).getFullYear();
+
+      // Update basic stats
+      this.updateStats({
+        publicRepos: user.public_repos,
+        privateRepos: 0,
+        followers: user.followers,
+        following: user.following,
+        totalStars,
+        totalForks,
+        totalPRs: 0,
+        totalIssues: 0,
+        totalGists: 0,
+        totalContributions: 0,
+        joinYear,
+        yearsActive: new Date().getFullYear() - joinYear,
+      });
+    }
+
+    private updateUserProfile(user: any) {
+      const avatarEl = document.getElementById(
+        "github-avatar",
+      ) as HTMLImageElement;
+      const nameEl = document.getElementById("github-name");
+      const bioEl = document.getElementById("github-bio");
+      const companyEl = document.getElementById("github-company");
+      const locationEl = document.getElementById("github-location");
+
+      if (avatarEl) avatarEl.src = user.avatar_url || user.avatarUrl;
+      if (nameEl) nameEl.textContent = user.name || `@${user.login}`;
+      if (bioEl)
+        bioEl.textContent =
+          user.bio || "Desarrollador apasionado por la tecnología";
+
+      if (user.company && companyEl) {
+        companyEl.classList.remove("hidden");
+        companyEl.querySelector("span")!.textContent = user.company;
+      }
+
+      if (user.location && locationEl) {
+        locationEl.classList.remove("hidden");
+        locationEl.querySelector("span")!.textContent = user.location;
+      }
+    }
+
+    private updateStats(stats: any) {
+      const elements = {
+        totalRepos: document.getElementById("total-repos"),
+        privateRepos: document.getElementById("private-repos"),
+        followers: document.getElementById("followers"),
+        following: document.getElementById("following"),
+        totalStars: document.getElementById("total-stars"),
+        totalForks: document.getElementById("total-forks"),
+        totalPRs: document.getElementById("total-prs"),
+        totalIssues: document.getElementById("total-issues"),
+        totalContributions: document.getElementById("total-contributions"),
+        totalGists: document.getElementById("total-gists"),
+        joinYear: document.getElementById("join-year"),
+        yearsActive: document.getElementById("years-active"),
+      };
+
+      // Animate main stats
+      if (elements.totalRepos) {
+        this.animateNumber(
+          elements.totalRepos,
+          stats.publicRepos + stats.privateRepos,
+        );
+      }
+
+      if (elements.followers) {
+        this.animateNumber(elements.followers, stats.followers);
+      }
+
+      if (elements.totalStars) {
+        this.animateNumber(elements.totalStars, stats.totalStars);
+      }
+
+      if (elements.joinYear) {
+        elements.joinYear.textContent = stats.joinYear.toString();
+      }
+
+      // Update secondary stats
+      if (elements.privateRepos && stats.privateRepos > 0) {
+        elements.privateRepos.classList.remove("hidden");
+        elements.privateRepos.querySelector("span")!.textContent =
+          stats.privateRepos.toString();
+      }
+
+      if (elements.following) {
+        elements.following.textContent = `siguiendo ${stats.following}`;
+      }
+
+      if (elements.totalForks) {
+        elements.totalForks.textContent = `${stats.totalForks} forks`;
+      }
+
+      if (elements.yearsActive) {
+        elements.yearsActive.textContent = `${stats.yearsActive} años activo`;
+      }
+
+      // Animate additional stats
+      if (elements.totalPRs) {
+        this.animateNumber(elements.totalPRs, stats.totalPRs);
+      }
+
+      if (elements.totalIssues) {
+        this.animateNumber(elements.totalIssues, stats.totalIssues);
+      }
+
+      if (elements.totalContributions) {
+        this.animateNumber(
+          elements.totalContributions,
+          stats.totalContributions,
+        );
+      }
+
+      if (elements.totalGists) {
+        this.animateNumber(elements.totalGists, stats.totalGists);
+      }
+    }
+
+    private updateOrganizations(orgs: any[]) {
+      const section = document.getElementById("organizations-section");
+      const list = document.getElementById("organizations-list");
+
+      if (!section || !list || orgs.length === 0) return;
+
+      section.classList.remove("hidden");
+
+      orgs.slice(0, 5).forEach((org) => {
+        const orgElement = document.createElement("div");
+        orgElement.className =
+          "flex items-center gap-2 bg-white/50 dark:bg-black/20 rounded-lg p-2 hover:bg-white/70 dark:hover:bg-black/30 transition-colors";
+        orgElement.innerHTML = `
+          <img src="${org.avatarUrl}" alt="${org.name}" class="w-6 h-6 rounded-full">
+          <span class="text-sm font-medium text-zinc-700 dark:text-zinc-300">${org.login}</span>
+        `;
+        list.appendChild(orgElement);
+      });
+    }
+
+    private animateNumber(
+      element: HTMLElement,
+      target: number,
+      duration: number = 1500,
+    ) {
+      const start = 0;
+      const startTime = performance.now();
+
+      const animate = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (target - start) * easeOut);
+
+        element.textContent = current.toString();
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
+
+    private showPrivateIndicator() {
+      if (this.hasToken) {
+        const indicator = document.getElementById("private-indicator");
+        if (indicator) {
+          indicator.classList.remove("hidden");
+          indicator.title = "Datos privados incluidos";
+        }
+      }
+    }
+
+    private hideLoading() {
+      const loadingEl = document.getElementById("stats-loading");
+      if (loadingEl) {
+        loadingEl.style.display = "none";
+      }
+    }
+
+    private showError() {
+      const loadingEl = document.getElementById("stats-loading");
+      const errorEl = document.getElementById("stats-error");
+
+      if (loadingEl) loadingEl.style.display = "none";
+      if (errorEl) {
+        errorEl.classList.remove("hidden");
+      }
+    }
+  }
+
+  // Initialize with intersection observer for lazy loading
+  function initEnhancedGitHubStats() {
+    const statsSection = document
+      .querySelector("#total-repos")
+      ?.closest(".grid");
+    if (!statsSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const username =
+              document
+                .querySelector("[data-username]")
+                ?.getAttribute("data-username") || "FabiSax12";
+            new EnhancedGitHubStats(username);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: "100px" },
+    );
+
+    observer.observe(statsSection);
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initEnhancedGitHubStats);
+  } else {
+    initEnhancedGitHubStats();
+  }
+
+  // Re-initialize on page changes (for Astro)
+  document.addEventListener("astro:page-load", initEnhancedGitHubStats);
+</script>
+
+<style>
+  /* Enhanced animations */
+  #github-avatar {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  #github-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .grid > div {
+    transition: all 0.2s ease;
+  }
+
+  .grid > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Private indicator pulse */
+  #private-indicator {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+</style>

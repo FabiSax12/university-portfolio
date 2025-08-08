@@ -1,0 +1,103 @@
+---
+import { Github, Code2, GitFork, Star } from "lucide-astro";
+import GitHubStats from "../github/GitHubStats.astro";
+import GitHubRepositories from "../github/GitHubRepositories.astro";
+import GitHubActivity from "../github/GitHubActivity.astro";
+import Link from "../ui/Link.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  username?: string;
+}
+
+const {
+  title = "Proyectos en GitHub",
+  subtitle = "Explorando código y construyendo soluciones",
+  username = "FabiSax12",
+} = Astro.props;
+---
+
+<section class="opacity-0 py-20 animate-fade-in-up">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-6">
+        <div class="p-3 bg-gray-100 dark:bg-gray-800 rounded-full">
+          <Github class="w-8 h-8 text-gray-700 dark:text-gray-300" />
+        </div>
+      </div>
+
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+      >
+        {title}
+      </h2>
+
+      <p class="text-lg text-gray-600 dark:text-gray-400 font-medium mb-6">
+        {subtitle}
+      </p>
+
+      <p
+        class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed mb-8"
+      >
+        Aquí puedes explorar mis repositorios más destacados, estadísticas de contribución 
+        y la actividad reciente en GitHub. Cada proyecto refleja mi pasión por el desarrollo 
+        y mi compromiso con el código limpio y las buenas prácticas.
+      </p>
+
+      <!-- GitHub Profile Link -->
+      <Link 
+        href={`https://github.com/${username}`}
+        variant="hoverEffect"
+        class="inline-flex items-center"
+      >
+        <Github class="w-5 h-5 mr-2" />
+        Ver perfil completo en GitHub
+      </Link>
+    </div>
+
+    <!-- GitHub Stats Overview -->
+    <GitHubStats username={username} />
+
+    <!-- Featured Repositories -->
+    <div class="mt-20">
+      <div class="flex items-center justify-between mb-12">
+        <div>
+          <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+            Repositorios Destacados
+          </h3>
+          <p class="text-zinc-600 dark:text-zinc-400">
+            Una selección de mis proyectos más relevantes
+          </p>
+        </div>
+        
+        <Link 
+          href={`https://github.com/${username}?tab=repositories`}
+          variant="link"
+          class="hidden sm:flex"
+        >
+          Ver todos los repositorios
+        </Link>
+      </div>
+
+      <GitHubRepositories username={username} />
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="mt-20">
+      <div class="flex items-center justify-between mb-12">
+        <div>
+          <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+            Actividad Reciente
+          </h3>
+          <p class="text-zinc-600 dark:text-zinc-400">
+            Mis últimas contribuciones y commits
+          </p>
+        </div>
+      </div>
+
+      <GitHubActivity username={username} />
+    </div>
+  </div>
+</section>

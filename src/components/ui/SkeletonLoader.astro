@@ -1,0 +1,125 @@
+---
+interface Props {
+  type?: 'card' | 'stats' | 'list' | 'chart';
+  count?: number;
+  className?: string;
+}
+
+const { type = 'card', count = 1, className = '' } = Astro.props;
+---
+
+{type === 'card' && (
+  <div class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}>
+    {Array.from({ length: count }, (_, i) => (
+      <div key={i} class="animate-pulse">
+        <div class="bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="h-6 bg-zinc-300 dark:bg-zinc-600 rounded w-3/4"></div>
+            <div class="h-4 w-4 bg-zinc-300 dark:bg-zinc-600 rounded"></div>
+          </div>
+          <div class="space-y-2">
+            <div class="h-4 bg-zinc-300 dark:bg-zinc-600 rounded w-full"></div>
+            <div class="h-4 bg-zinc-300 dark:bg-zinc-600 rounded w-2/3"></div>
+          </div>
+          <div class="flex items-center justify-between pt-4">
+            <div class="flex gap-4">
+              <div class="h-4 bg-zinc-300 dark:bg-zinc-600 rounded w-8"></div>
+              <div class="h-4 bg-zinc-300 dark:bg-zinc-600 rounded w-8"></div>
+            </div>
+            <div class="h-6 bg-zinc-300 dark:bg-zinc-600 rounded w-16"></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
+{type === 'stats' && (
+  <div class={`grid grid-cols-2 md:grid-cols-4 gap-6 ${className}`}>
+    {Array.from({ length: 4 }, (_, i) => (
+      <div key={i} class="animate-pulse">
+        <div class="bg-zinc-200 dark:bg-zinc-700 rounded-xl p-4 text-center space-y-2">
+          <div class="h-4 w-4 bg-zinc-300 dark:bg-zinc-600 rounded mx-auto"></div>
+          <div class="h-8 bg-zinc-300 dark:bg-zinc-600 rounded w-16 mx-auto"></div>
+          <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-20 mx-auto"></div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
+{type === 'list' && (
+  <div class={`space-y-4 ${className}`}>
+    {Array.from({ length: count }, (_, i) => (
+      <div key={i} class="animate-pulse">
+        <div class="flex items-start gap-3 p-4 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+          <div class="h-8 w-8 bg-zinc-300 dark:bg-zinc-600 rounded-lg"></div>
+          <div class="flex-1 space-y-2">
+            <div class="h-4 bg-zinc-300 dark:bg-zinc-600 rounded w-3/4"></div>
+            <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-1/2"></div>
+            <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-1/4"></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
+{type === 'chart' && (
+  <div class={`space-y-4 ${className}`}>
+    <div class="animate-pulse">
+      <div class="space-y-2">
+        <div class="flex justify-between text-xs">
+          <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-24"></div>
+          <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-20"></div>
+        </div>
+        <div class="grid grid-cols-12 gap-1">
+          {Array.from({ length: 84 }, (_, i) => (
+            <div key={i} class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded-sm"></div>
+          ))}
+        </div>
+        <div class="flex justify-between items-center mt-4">
+          <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-12"></div>
+          <div class="flex gap-1">
+            {Array.from({ length: 5 }, (_, i) => (
+              <div key={i} class="h-3 w-3 bg-zinc-300 dark:bg-zinc-600 rounded-sm"></div>
+            ))}
+          </div>
+          <div class="h-3 bg-zinc-300 dark:bg-zinc-600 rounded w-8"></div>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-pulse {
+    animation: shimmer 2s ease-in-out infinite;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+
+  .dark .animate-pulse {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    background-size: 200% 100%;
+  }
+</style>
