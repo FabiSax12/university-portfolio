@@ -6,13 +6,39 @@ import UniversityProgress from "@/components/sections/UniversityProgress.astro";
 import ContactDialog from "@/components/contact-dialog/ContactDialog.astro";
 import BuildingMessage from "@/components/sections/BuildingMessage.astro";
 import Projects from "@/components/sections/Projects.astro";
+import { GraduationCap } from "lucide-astro";
 ---
 
 <MainLayout>
 	<Hero />
 	<TechStack />
 	<Projects />
-	<UniversityProgress />
+	<!-- <UniversityProgress /> -->
+	<a
+		href="/university-progress"
+		rel="noopener noreferrer"
+		class="text-center mb-16"
+	>
+		<div class="flex items-center justify-center mb-6">
+			<div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+				<GraduationCap
+					class="w-8 h-8 text-violet-600 dark:text-violet-400"
+				/>
+			</div>
+		</div>
+
+		<h2
+			class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+		>
+			Ver más sobre mi progreso académico
+		</h2>
+
+		<p
+			class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6"
+		>
+			Ingeniería en Computación
+		</p>
+	</a>
 	<ContactDialog />
 	<BuildingMessage />
 </MainLayout>
