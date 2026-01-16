@@ -137,6 +137,43 @@ export const projects: Project[] = [
     role: "Frontend Developer",
     priority: 2
   },
+  {
+    id: "dev-plan-kit",
+    title: "DevPlanKit",
+    subtitle: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+    description: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+    problem: "",
+    solution: "",
+    techStack: [
+      { name: "React", icon: "/icons/skills/react.svg" },
+      { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
+      { name: "TansTack Start", icon: "/icons/skills/react.svg" },
+      { name: "Vercel AI SDK", icon: "/icons/skills/vercel.svg" },
+    ],
+    features: [
+      "Separación entre 'Ideas' y 'Proyectos' para un mejor desarrollo de conceptos.",
+      "Integración de IA para redacción de requerimientos y brainstorming.",
+      "Interfaz intuitiva y fácil de usar para gestionar proyectos.",
+    ],
+    challenges: [
+
+    ],
+    metrics: [
+
+    ],
+    links: [
+      { type: 'github', url: 'https://github.com/FabiSax12/devplankit', label: 'Ver código' },
+      { type: 'demo', url: 'https://devplankit.com', label: 'Web Oficial' }
+    ],
+    image: "/projects/devplankit/demo.png",
+    imageAlt: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+    status: 'in-progress',
+    category: 'fullstack',
+    startDate: "2026-01",
+    teamSize: 1,
+    role: "Fullstack Developer",
+    priority: 3
+  },
   // {
   //   id: "task-api",
   //   title: "TaskFlow API",
@@ -209,13 +246,11 @@ export const getProjectStats = () => {
   const completed = projects.filter(p => p.status === 'completed').length;
   const inProgress = projects.filter(p => p.status === 'in-progress').length;
 
-  const techUsed = [...new Set(projects.flatMap(p => p.techStack.map(t => t.name)))];
-
   return {
     total,
     completed,
     inProgress,
-    techCount: techUsed.length,
+    techCount: new Set(projects.flatMap(p => p.techStack.map(t => t.name))).size,
     completionRate: Math.round((completed / total) * 100)
   };
 };
