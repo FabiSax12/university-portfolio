@@ -12,6 +12,7 @@ const {
   download,
   variant = "solid",
   isIconOnly = false,
+  target = "_blank",
   class: classNameProp,
   ...props
 } = Astro.props;
@@ -44,7 +45,7 @@ else if (variant === "hoverEffect")
 <a
   href={href}
   download={download}
-  target="_blank"
+  target={target}
   rel="noopener noreferrer"
   class={cn(className, classNameProp)}
   {...props}

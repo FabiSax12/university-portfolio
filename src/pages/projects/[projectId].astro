@@ -1,0 +1,25 @@
+---
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import { projects } from "@/data/projects";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+export function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { projectId: project.id },
+    }));
+}
+
+const { projectId } = Astro.params;
+
+const project = projects.find((p) => p.id === projectId);
+
+if (!project) {
+    throw new Error(`Project with ID "${projectId}" not found.`);
+}
+---
+
+<MainLayout>
+    <div class="md:my-20 sm:my-8">
+        <ProjectCard project={project} />
+    </div>
+</MainLayout>
