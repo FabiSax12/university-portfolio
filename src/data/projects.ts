@@ -82,7 +82,7 @@ export const projects: Project[] = [
     ],
     "links": [
       { "type": "github", "url": "https://github.com/FabiSax12/easy-tec_proyect", "label": "Ver código" },
-      { "type": "demo", "url": "https://horarios-tec.vercel.app", "label": "Demo en vivo" }
+      { "type": "demo", "url": "https://tec-horarios.fabian-vargas.com", "label": "Demo en vivo" }
     ],
     "image": "/projects/tec-horarios/demo.png",
     "imageAlt": "Interfaz de generación automática de horarios del TEC mostrando calendario semanal",

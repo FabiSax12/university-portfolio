@@ -52,8 +52,8 @@ export const universityProgress: CourseCategory[] = [
     },
     courses: [
       { name: "Análisis de Algoritmos", status: 'completed', credits: 4 },
-      { name: "Lenguajes de Programación", status: 'pending', credits: 4 },
-      { name: "Compiladores e Intérpretes", status: 'pending', credits: 4 },
+      { name: "Lenguajes de Programación", status: 'completed', credits: 4 },
+      { name: "Compiladores e Intérpretes", status: 'current', credits: 4 },
       { name: "Principios de Sistemas Operativos", status: 'pending', credits: 4 },
       { name: "Investigación de Operaciones", status: 'pending', credits: 4 },
       { name: "Inteligencia Artificial", status: 'pending', credits: 4 },
@@ -72,9 +72,9 @@ export const universityProgress: CourseCategory[] = [
     },
     courses: [
       { name: "Requerimientos de Software", status: 'completed', credits: 4 },
-      { name: "Diseño de Software", status: 'pending', credits: 4 },
-      { name: "Administración de Proyectos", status: 'pending', credits: 4 },
-      { name: "Aseguramiento de la Calidad de Software", status: 'pending', credits: 3 },
+      { name: "Diseño de Software", status: 'completed', credits: 4 },
+      { name: "Administración de Proyectos", status: 'current', credits: 4 },
+      { name: "Aseguramiento de la Calidad de Software", status: 'current', credits: 3 },
       { name: "Proyecto de Ingeniería de Software", status: 'pending', credits: 3 },
       { name: "Computación y Sociedad", status: 'pending', credits: 2 },
       // { name: "Seguridad del Software", status: 'pending', credits: 3 }
@@ -92,7 +92,7 @@ export const universityProgress: CourseCategory[] = [
     },
     courses: [
       { name: "Bases de Datos 1", status: 'completed', credits: 4 },
-      { name: "Bases de Datos 2", status: 'pending', credits: 3 }
+      { name: "Bases de Datos 2", status: 'completed', credits: 3 }
     ]
   },
   {
@@ -106,7 +106,7 @@ export const universityProgress: CourseCategory[] = [
       progressBar: 'to-cyan-900/70 from-cyan-400/70 dark:from-cyan-900/70 dark:to-cyan-400/70'
     },
     courses: [
-      { name: "Electiva 1", status: 'pending', credits: 3 },
+      { name: "Electiva 1", status: 'current', credits: 3 },
       { name: "Electiva 2", status: 'pending', credits: 3 }
     ]
   },
