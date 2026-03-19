@@ -5,6 +5,7 @@ import { FOOTER_EN } from './footer';
 import { PROJECTS_EN } from './projects';
 import { UNIVERSITY_EN } from './university';
 import { METADATA_EN } from './metadata';
+import { PAGES_EN } from './pages';
 
 export const TRANSLATIONS_EN = Object.freeze({
   common: COMMON_EN,
@@ -14,4 +15,5 @@ export const TRANSLATIONS_EN = Object.freeze({
   projects: PROJECTS_EN,
   university: UNIVERSITY_EN,
   metadata: METADATA_EN,
+  pages: PAGES_EN,
 });

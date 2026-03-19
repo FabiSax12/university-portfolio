@@ -5,6 +5,7 @@ import { FORMATTERS } from "@/features/i18n/domain/formatters";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   stats: {
     total: number;
     completed: number;
@@ -18,10 +19,9 @@ interface Props {
   };
 }
 
-const { stats } = Astro.props;
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
-const formatters = FORMATTERS[language];
+const { stats, lang } = Astro.props;
+const t = getTranslation(lang);
+const formatters = FORMATTERS[lang];
 ---
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

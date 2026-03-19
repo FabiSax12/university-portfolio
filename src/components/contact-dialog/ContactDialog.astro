@@ -4,10 +4,14 @@ import ContactInfo from "@/components/contact-dialog/ContactInfo.astro";
 import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
 ---
 
 <Dialog id="contact" title={t.contact.TITLE as string}>
-  <ContactInfo />
+  <ContactInfo lang={lang} />
 </Dialog>

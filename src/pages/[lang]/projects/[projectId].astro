@@ -1,0 +1,42 @@
+---
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import { projects } from "@/data/projects";
+import MainLayout from "@/layouts/MainLayout.astro";
+import { LANGUAGES, type Language } from "@/features/i18n";
+import { getLocalizedProjects } from "@/data/getLocalizedProjects";
+
+export function getStaticPaths() {
+    const languages = [LANGUAGES.ES, LANGUAGES.EN];
+
+    return languages.flatMap((lang) =>
+        projects.map((project) => ({
+            params: {
+                lang,
+                projectId: project.id,
+            },
+        })),
+    );
+}
+
+const { lang, projectId } = Astro.params;
+
+// Validate lang parameter
+const language =
+    lang === LANGUAGES.EN || lang === LANGUAGES.ES
+        ? (lang as Language)
+        : LANGUAGES.ES;
+
+// Get localized projects
+const localizedProjects = getLocalizedProjects(language);
+const project = localizedProjects.find((p) => p.id === projectId);
+
+if (!project) {
+    throw new Error(`Project with ID "${projectId}" not found.`);
+}
+---
+
+<MainLayout lang={language}>
+    <div class="md:my-20 sm:my-8">
+        <ProjectCard project={project} lang={language} />
+    </div>
+</MainLayout>

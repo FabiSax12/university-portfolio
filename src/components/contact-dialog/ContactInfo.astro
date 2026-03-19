@@ -4,6 +4,7 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   email?: string;
   linkedin?: string;
   github?: string;
@@ -13,8 +14,8 @@ interface Props {
   footerText?: string;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
 const {
   email = "fabidev18@gmail.com",
@@ -24,7 +25,7 @@ const {
   githubUsername = "@FabiSax12",
   description = t.contact.DESCRIPTION,
   footerText = t.contact.FOOTER_TEXT,
-} = Astro.props;
+} = otherProps;
 
 const contactMethods = [
   {

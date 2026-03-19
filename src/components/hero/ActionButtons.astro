@@ -6,21 +6,22 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   cvUrl?: string;
   contactText?: string;
   downloadText?: string;
   fileName?: string;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
 const {
-  cvUrl = `/docs/${language}/CV - Fabian Vargas.pdf`,
+  cvUrl = `/docs/${lang}/CV - Fabian Vargas.pdf`,
   contactText = t.hero.CONTACT_BUTTON,
   downloadText = t.hero.DOWNLOAD_CV_BUTTON,
   fileName = "Fabian Vargas CV.pdf",
-} = Astro.props;
+} = otherProps;
 ---
 
 <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">

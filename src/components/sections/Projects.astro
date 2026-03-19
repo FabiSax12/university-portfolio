@@ -17,21 +17,22 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   title?: string;
   subtitle?: string;
   showAll?: boolean;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
 const {
   title = t.projects.TITLE,
   subtitle = t.projects.SUBTITLE,
   showAll = false,
-} = Astro.props;
+} = otherProps;
 
-const localizedProjects = getLocalizedProjects(language);
+const localizedProjects = getLocalizedProjects(lang);
 const featuredProjects = localizedProjects.sort((a, b) => a.priority - b.priority).slice(0, 3);
 const displayProjects = showAll ? localizedProjects : featuredProjects;
 const stats = getProjectStats();
@@ -169,7 +170,7 @@ const stats = getProjectStats();
               {t.projects.FEATURED_PROJECT}
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <ProjectCard project={featuredProjects[0]} featured={true} />
+              <ProjectCard project={featuredProjects[0]} featured={true} lang={lang} />
             </div>
           </div>
         )
@@ -185,7 +186,7 @@ const stats = getProjectStats();
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {displayProjects.slice(1).map((project) => (
-                <ProjectCard project={project} />
+                <ProjectCard project={project} lang={lang} />
               ))}
             </div>
           </div>

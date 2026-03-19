@@ -28,12 +28,12 @@ import type { Language } from "@/features/i18n/config/languages";
 interface Props {
   project: Project;
   featured?: boolean;
+  lang: Language;
 }
 
-const { project, featured = false } = Astro.props;
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
-const formatters = FORMATTERS[language];
+const { project, featured = false, lang } = Astro.props;
+const t = getTranslation(lang);
+const formatters = FORMATTERS[lang];
 
 const getStatusIcon = (status: string) => {
   switch (status) {

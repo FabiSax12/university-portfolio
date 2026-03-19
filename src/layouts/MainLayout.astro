@@ -9,16 +9,17 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  lang: Language; // REQUIRED prop for [lang] routing
 }
 
-// Use Astro's built-in i18n routing to detect language
-const language = (Astro.currentLocale || "es") as Language;
+const { lang, title: customTitle, description: customDescription } = Astro.props;
+
+// Use lang prop as the language
+const language = lang;
 const t = getTranslation(language);
 
-const {
-  title = t.metadata.PAGE_TITLE_DEFAULT,
-  description = t.metadata.PAGE_DESCRIPTION_DEFAULT,
-}: Props = Astro.props;
+const title = customTitle || t.metadata.PAGE_TITLE_DEFAULT;
+const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
 ---
 
 <html lang={language}>
@@ -34,11 +35,11 @@ const {
   <body
     class="grid grid-rows-[1fr_auto] min-h-dvh bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white antialiased"
   >
-    <Header currentLanguage={language} />
+    <Header lang={language} />
     <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <slot />
     </main>
-    <Footer currentLanguage={language} />
+    <Footer lang={language} />
   </body>
   <Analytics />
 </html>

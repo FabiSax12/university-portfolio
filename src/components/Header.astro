@@ -1,12 +1,13 @@
 ---
 import { Sun, Moon } from "lucide-astro";
 import LanguageSwitcher from "@/features/i18n/ui/LanguageSwitcher.astro";
+import type { Language } from "@/features/i18n";
 
 interface Props {
-  currentLanguage: string;
+  lang: Language;
 }
 
-const { currentLanguage } = Astro.props;
+const { lang } = Astro.props;
 ---
 
 <nav
@@ -14,14 +15,14 @@ const { currentLanguage } = Astro.props;
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a class="flex items-center" href={Astro.currentLocale === 'en' ? '/en/' : '/'}>
+      <a class="flex items-center" href={`/${lang}/`}>
         <span class="text-xl font-bold text-zinc-900 dark:text-white">
           Fabian
           <span class="text-violet-600 dark:text-violet-400">Vargas</span>
         </span>
       </a>
       <div class="flex items-center gap-2">
-        <LanguageSwitcher currentLanguage={currentLanguage} />
+        <LanguageSwitcher lang={lang} />
         <button
           id="theme-toggle"
           type="button"

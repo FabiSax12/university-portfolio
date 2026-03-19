@@ -6,6 +6,7 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   name?: string;
   title?: string;
   description?: string;
@@ -13,16 +14,16 @@ interface Props {
   cvUrl?: string;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
 const {
   name = t.hero.NAME,
   title = t.hero.TITLE,
   description = t.hero.DESCRIPTION,
   profileImage = "/Yo.jpg",
-  cvUrl = `/docs/${language}/CV - Fabian Vargas.pdf`,
-} = Astro.props;
+  cvUrl = `/docs/${lang}/CV - Fabian Vargas.pdf`,
+} = otherProps;
 ---
 
 <div class="min-h-dvh flex flex-col pt-16 sm:pt-8">
@@ -56,7 +57,7 @@ const {
         {description}
       </p>
 
-      <ActionButtons cvUrl={cvUrl} />
+      <ActionButtons lang={lang} cvUrl={cvUrl} />
       <SocialLinks />
     </div>
 

@@ -10,17 +10,18 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   title?: string;
   subtitle?: string;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
 const {
   title = t.university.TITLE,
   subtitle = t.university.SUBTITLE,
-} = Astro.props;
+} = otherProps;
 
 const stats = getProgressStats();
 ---
@@ -55,13 +56,13 @@ const stats = getProgressStats();
     </div>
 
     <!-- Progress Overview -->
-    <ProgressStats stats={stats} />
+    <ProgressStats stats={stats} lang={lang} />
 
     <!-- Categories Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
       {
         universityProgress.map((category, index) => (
-          <CourseCategory category={category} index={index} />
+          <CourseCategory category={category} index={index} lang={lang} />
         ))
       }
     </div>

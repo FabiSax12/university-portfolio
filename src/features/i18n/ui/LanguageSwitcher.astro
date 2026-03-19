@@ -1,27 +1,29 @@
 ---
 import { Languages } from "lucide-astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import type { Language } from "@/features/i18n";
 
 interface Props {
-  currentLanguage: string;
+  lang: Language;
 }
 
-const { currentLanguage } = Astro.props;
+const { lang } = Astro.props;
 
 // Determine the other locale
-const otherLocale = currentLanguage === 'es' ? 'en' : 'es';
+const otherLocale = lang === 'es' ? 'en' : 'es';
 
-// Get current path without locale prefix
-const currentPath = Astro.url.pathname.replace(/^\/en/, '') || '/';
+// Get current path without locale prefix (works for both /es/ and /en/)
+const pathname = Astro.url.pathname;
+const pathWithoutLocale = pathname.replace(/^\/(es|en)/, '') || '/';
 
 // Build URL for the other language
-const switchUrl = getRelativeLocaleUrl(otherLocale, currentPath);
+const switchUrl = getRelativeLocaleUrl(otherLocale, pathWithoutLocale);
 ---
 
 <a
   href={switchUrl}
   class="p-2 rounded-lg bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 inline-flex items-center justify-center"
-  aria-label={currentLanguage === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+  aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
 >
   <Languages class="w-5 h-5" />
 </a>

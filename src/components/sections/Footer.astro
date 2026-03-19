@@ -6,11 +6,11 @@ import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
-  currentLanguage?: string;
+  lang: Language;
 }
 
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { lang } = Astro.props;
+const t = getTranslation(lang);
 ---
 
 <footer

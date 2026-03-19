@@ -12,11 +12,11 @@ interface Props {
     bg: string;
     border: string;
   };
+  lang: Language;
 }
 
-const { course, categoryColor } = Astro.props;
-const language = (Astro.currentLocale || 'es') as Language;
-const t = getTranslation(language);
+const { course, categoryColor, lang } = Astro.props;
+const t = getTranslation(lang);
 
 const getStatusIcon = (status: string) => {
   switch (status) {

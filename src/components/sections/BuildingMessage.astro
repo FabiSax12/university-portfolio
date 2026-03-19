@@ -1,5 +1,14 @@
 ---
 import { Construction } from "lucide-astro";
+import type { Language } from "@/features/i18n";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslation(lang);
 ---
 
 <div class="opacity-0 py-16 animate-fade-in-up">
@@ -11,13 +20,19 @@ import { Construction } from "lucide-astro";
         <h3
           class="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white"
         >
-          Más secciones en construcción 🚧
+          {lang === 'es' ? 'Más secciones en construcción 🚧' : 'More sections under construction 🚧'}
         </h3><p
           class="text-zinc-600 dark:text-zinc-300 text-sm sm:text-base max-w-xl"
         >
-          Estoy trabajando para terminar esta sección.<br />
-          Regresa Pronto y estará disponible para que la veas.<br />
-          ¡Gracias por tu paciencia!
+          {lang === 'es' 
+            ? 'Estoy trabajando para terminar esta sección.' 
+            : 'I am working to finish this section.'}
+          <br />
+          {lang === 'es' 
+            ? 'Regresa pronto y estará disponible para que la veas.' 
+            : 'Come back soon and it will be available for you.'}
+          <br />
+          {lang === 'es' ? '¡Gracias por tu paciencia!' : 'Thank you for your patience!'}
         </p>
       </div>
     </div>

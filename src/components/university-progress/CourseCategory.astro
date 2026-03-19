@@ -3,13 +3,15 @@ import { ChevronDown } from "lucide-astro";
 import CourseCard from "./CourseCard.astro";
 import { getCategoryProgress } from "@/data/university-progress";
 import type { CourseCategory } from "@/data/university-progress";
+import type { Language } from "@/features/i18n";
 
 interface Props {
   category: CourseCategory;
   index: number;
+  lang: Language;
 }
 
-const { category, index } = Astro.props;
+const { category, index, lang } = Astro.props;
 const progress = getCategoryProgress(category);
 const progressBarColorFrom = category.color.primary.replace('text-', 'from-').replace('dark:text-', 'dark:from-');
 const progressBarColorTo = category.color.secondary.replace('text-', 'to-').replace('dark:text-', 'dark:to-');
@@ -48,7 +50,7 @@ console.log(category.color.primary)
               {category.name}
             </h3>
             <p class="text-sm text-zinc-600 dark:text-zinc-400">
-              {progress.completed} de {progress.total} materias
+              {progress.completed} {lang === 'es' ? 'de' : 'of'} {progress.total} {lang === 'es' ? 'materias' : 'courses'}
             </p>
           </div>
         </div>
@@ -58,7 +60,7 @@ console.log(category.color.primary)
             {progress.percentage}%
           </div>
           <div class="text-sm text-zinc-500 dark:text-zinc-400">
-            completado
+            {lang === 'es' ? 'completado' : 'completed'}
           </div>
         </div>
       </div>
@@ -74,9 +76,9 @@ console.log(category.color.primary)
         </div>
 
         <div class="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
-          <span>{progress.completed} completadas</span>
-          <span>{progress.current} en curso</span>
-          <span>{progress.pending} pendientes</span>
+          <span>{progress.completed} {lang === 'es' ? 'completadas' : 'completed'}</span>
+          <span>{progress.current} {lang === 'es' ? 'en curso' : 'in progress'}</span>
+          <span>{progress.pending} {lang === 'es' ? 'pendientes' : 'pending'}</span>
         </div>
       </div>
     </div>
@@ -91,7 +93,7 @@ console.log(category.color.primary)
         aria-controls={`courses-${index}`}
       >
         <span class={`font-medium ${category.color.primary}`}>
-          Ver Materias ({category.courses.length})
+          {lang === 'es' ? 'Ver Materias' : 'View Courses'} ({category.courses.length})
         </span>
         <ChevronDown class={`w-5 h-5 ${category.color.primary} transition-transform duration-300 toggle-icon`} />
       </button>
@@ -106,6 +108,7 @@ console.log(category.color.primary)
             <CourseCard
               course={course}
               categoryColor={category.color}
+              lang={lang}
             />
           ))}
         </div>
