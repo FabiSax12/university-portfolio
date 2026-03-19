@@ -2,6 +2,8 @@
 import Header from "@/components/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Analytics from "@vercel/analytics/astro";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 import "../styles/global.css";
 
 interface Props {
@@ -9,13 +11,17 @@ interface Props {
   description?: string;
 }
 
+// Use Astro's built-in i18n routing to detect language
+const language = (Astro.currentLocale || "es") as Language;
+const t = getTranslation(language);
+
 const {
-  title = "Fabian Vargas | Web Dev",
-  description = "Portfolio Web",
+  title = t.metadata.PAGE_TITLE_DEFAULT,
+  description = t.metadata.PAGE_DESCRIPTION_DEFAULT,
 }: Props = Astro.props;
 ---
 
-<html lang="es">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -28,11 +34,11 @@ const {
   <body
     class="grid grid-rows-[1fr_auto] min-h-dvh bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white antialiased"
   >
-    <Header />
+    <Header currentLanguage={language} />
     <main class="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <slot />
     </main>
-    <Footer />
+    <Footer currentLanguage={language} />
   </body>
   <Analytics />
 </html>

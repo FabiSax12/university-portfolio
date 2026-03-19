@@ -2,6 +2,15 @@
 import { Heart } from "lucide-astro";
 import Link from "../ui/Link.astro";
 import { socialLinks } from "@/data/social-links";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
+
+interface Props {
+  currentLanguage?: string;
+}
+
+const language = (Astro.currentLocale || 'es') as Language;
+const t = getTranslation(language);
 ---
 
 <footer
@@ -14,16 +23,13 @@ import { socialLinks } from "@/data/social-links";
           Fabian <span class="text-violet-600 dark:text-violet-400">Vargas</span
           >
         </div><p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-xl">
-          Soy un apasionado de construir con arquitecturas modernas y la
-          escalabilidad. Amo la Programación Orientada a Objetos, los principios
-          SOLID y el Clean Code. Experimentado con React, TypeScript, Node.js y
-          frameworks backend de NodeJs.
+          {t.hero.DESCRIPTION}
         </p>
       </div><div class="md:col-span-2 md:pl-12">
         <h3
           class="text-sm font-semibold text-zinc-900 dark:text-white uppercase tracking-wider mb-4"
         >
-          Información de contacto
+          {t.footer.CONTACT_INFO_TITLE}
         </h3><ul class="space-y-2">
           {
             socialLinks.map(({ external, href, icon: Icon, label }) => (
@@ -49,8 +55,8 @@ import { socialLinks } from "@/data/social-links";
       <p
         class="text-center text-sm text-zinc-500 dark:text-zinc-500 mt-2 flex items-center justify-center"
       >
-        Hecho con
-        <Heart class="w-4 h-4 mx-1 text-red-500" /> &
+        {t.footer.MADE_WITH}
+        <Heart class="w-4 h-4 mx-1 text-red-500" /> {t.footer.MADE_WITH_AND}
         <Link
           variant="link"
           target="_blank"

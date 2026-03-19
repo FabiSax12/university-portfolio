@@ -6,15 +6,20 @@ import {
   universityProgress,
   getProgressStats,
 } from "@/data/university-progress";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
   title?: string;
   subtitle?: string;
 }
 
+const language = (Astro.currentLocale || 'es') as Language;
+const t = getTranslation(language);
+
 const {
-  title = "Progreso Universitario",
-  subtitle = "Ingeniería en Computación",
+  title = t.university.TITLE,
+  subtitle = t.university.SUBTITLE,
 } = Astro.props;
 
 const stats = getProgressStats();
@@ -75,18 +80,18 @@ const stats = getProgressStats();
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-green-500 rounded-full"></div>
           <span class="text-sm text-zinc-600 dark:text-zinc-400"
-            >Completada</span
+            >{t.university.COMPLETED_STATUS}</span
           >
         </div>
 
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
-          <span class="text-sm text-zinc-600 dark:text-zinc-400">En Curso</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">{t.university.IN_PROGRESS_STATUS}</span>
         </div>
 
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
-          <span class="text-sm text-zinc-600 dark:text-zinc-400">Pendiente</span
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">{t.university.PENDING_STATUS}</span
           >
         </div>
       </div>

@@ -1,5 +1,8 @@
 ---
 import { CheckCircle, Clock, BookOpen, Award } from "lucide-astro";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import { FORMATTERS } from "@/features/i18n/domain/formatters";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
   stats: {
@@ -16,6 +19,9 @@ interface Props {
 }
 
 const { stats } = Astro.props;
+const language = (Astro.currentLocale || 'es') as Language;
+const t = getTranslation(language);
+const formatters = FORMATTERS[language];
 ---
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -32,12 +38,12 @@ const { stats } = Astro.props;
           {stats.completed}
         </div>
         <div class="text-sm text-green-600/70 dark:text-green-400/70">
-          de {stats.total}
+          {formatters.OF_TOTAL(stats.completed, stats.total)}
         </div>
       </div>
     </div>
     <div class="space-y-2">
-      <h3 class="font-semibold text-zinc-900 dark:text-white">Completadas</h3>
+      <h3 class="font-semibold text-zinc-900 dark:text-white">{t.university.COMPLETED_LABEL}</h3>
       <div class="w-full bg-green-200 dark:bg-green-800 rounded-full h-2">
         <div
           class="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-out"
@@ -46,7 +52,7 @@ const { stats } = Astro.props;
         </div>
       </div>
       <p class="text-xs text-zinc-600 dark:text-zinc-400">
-        {Math.round((stats.completed / stats.total) * 100)}% del total
+        {formatters.PROGRESS_PERCENT(Math.round((stats.completed / stats.total) * 100))}
       </p>
     </div>
   </div>
@@ -64,12 +70,12 @@ const { stats } = Astro.props;
           {stats.current}
         </div>
         <div class="text-sm text-blue-600/70 dark:text-blue-400/70">
-          activas
+          {t.university.ACTIVE}
         </div>
       </div>
     </div>
     <div class="space-y-2">
-      <h3 class="font-semibold text-zinc-900 dark:text-white">En Curso</h3>
+      <h3 class="font-semibold text-zinc-900 dark:text-white">{t.university.IN_PROGRESS_LABEL}</h3>
       <div class="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
         <div
           class="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-out animate-pulse"
@@ -78,7 +84,7 @@ const { stats } = Astro.props;
         </div>
       </div>
       <p class="text-xs text-zinc-600 dark:text-zinc-400">
-        {Math.round((stats.current / stats.total) * 100)}% del total
+        {formatters.PROGRESS_PERCENT(Math.round((stats.current / stats.total) * 100))}
       </p>
     </div>
   </div>
@@ -96,12 +102,12 @@ const { stats } = Astro.props;
           {stats.completedCredits + stats.currentCredits}
         </div>
         <div class="text-sm text-violet-600/70 dark:text-violet-400/70">
-          de {stats.totalCredits}
+          {formatters.OF_TOTAL(stats.completedCredits + stats.currentCredits, stats.totalCredits)}
         </div>
       </div>
     </div>
     <div class="space-y-2">
-      <h3 class="font-semibold text-zinc-900 dark:text-white">Créditos</h3>
+      <h3 class="font-semibold text-zinc-900 dark:text-white">{t.university.CREDITS_LABEL}</h3>
       <div class="w-full bg-violet-200 dark:bg-violet-800 rounded-full h-2">
         <div
           class="bg-violet-500 h-2 rounded-full transition-all duration-1000 ease-out"
@@ -110,7 +116,7 @@ const { stats } = Astro.props;
         </div>
       </div>
       <p class="text-xs text-zinc-600 dark:text-zinc-400">
-        {stats.creditsPercentage}% completados
+        {formatters.PROGRESS_PERCENT(stats.creditsPercentage)}
       </p>
     </div>
   </div>
@@ -128,12 +134,12 @@ const { stats } = Astro.props;
           {stats.completionPercentage}%
         </div>
         <div class="text-sm text-amber-600/70 dark:text-amber-400/70">
-          completado
+          {t.university.PERCENT_COMPLETE}
         </div>
       </div>
     </div>
     <div class="space-y-2">
-      <h3 class="font-semibold text-zinc-900 dark:text-white">Progreso</h3>
+      <h3 class="font-semibold text-zinc-900 dark:text-white">{t.university.PROGRESS_LABEL}</h3>
       <div class="w-full bg-amber-200 dark:bg-amber-800 rounded-full h-2">
         <div
           class="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full transition-all duration-1000 ease-out"
@@ -142,7 +148,7 @@ const { stats } = Astro.props;
         </div>
       </div>
       <p class="text-xs text-zinc-600 dark:text-zinc-400">
-        {stats.pending} materias pendientes
+        {stats.pending} {t.university.SUBJECTS_PENDING}
       </p>
     </div>
   </div>
