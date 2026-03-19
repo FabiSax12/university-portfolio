@@ -2,20 +2,26 @@
 import { Mail, Download } from "lucide-astro";
 import Button from "../ui/Button.astro";
 import Link from "../ui/Link.astro";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   cvUrl?: string;
   contactText?: string;
   downloadText?: string;
   fileName?: string;
 }
 
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
+
 const {
-  cvUrl = "/docs/cv.pdf",
-  contactText = "Contáctame",
-  downloadText = "Descargar CV",
+  cvUrl = `/docs/${lang}/CV - Fabian Vargas.pdf`,
+  contactText = t.hero.CONTACT_BUTTON,
+  downloadText = t.hero.DOWNLOAD_CV_BUTTON,
   fileName = "Fabian Vargas CV.pdf",
-} = Astro.props;
+} = otherProps;
 ---
 
 <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">

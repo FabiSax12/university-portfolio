@@ -6,16 +6,22 @@ import {
   universityProgress,
   getProgressStats,
 } from "@/data/university-progress";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   title?: string;
   subtitle?: string;
 }
 
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
+
 const {
-  title = "Progreso Universitario",
-  subtitle = "Ingeniería en Computación",
-} = Astro.props;
+  title = t.university.TITLE,
+  subtitle = t.university.SUBTITLE,
+} = otherProps;
 
 const stats = getProgressStats();
 ---
@@ -50,13 +56,13 @@ const stats = getProgressStats();
     </div>
 
     <!-- Progress Overview -->
-    <ProgressStats stats={stats} />
+    <ProgressStats stats={stats} lang={lang} />
 
     <!-- Categories Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
       {
         universityProgress.map((category, index) => (
-          <CourseCategory category={category} index={index} />
+          <CourseCategory category={category} index={index} lang={lang} />
         ))
       }
     </div>
@@ -75,18 +81,18 @@ const stats = getProgressStats();
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-green-500 rounded-full"></div>
           <span class="text-sm text-zinc-600 dark:text-zinc-400"
-            >Completada</span
+            >{t.university.COMPLETED_STATUS}</span
           >
         </div>
 
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
-          <span class="text-sm text-zinc-600 dark:text-zinc-400">En Curso</span>
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">{t.university.IN_PROGRESS_STATUS}</span>
         </div>
 
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
-          <span class="text-sm text-zinc-600 dark:text-zinc-400">Pendiente</span
+          <span class="text-sm text-zinc-600 dark:text-zinc-400">{t.university.PENDING_STATUS}</span
           >
         </div>
       </div>

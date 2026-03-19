@@ -81,7 +81,7 @@ export const projects: Project[] = [
       // { "label": "Eficiencia algoritmo", "value": "O(n!)", "description": "Complejidad optimizada" }
     ],
     "links": [
-      { "type": "github", "url": "https://github.com/FabiSax12/easy-tec_proyect", "label": "Ver código" },
+      { "type": "github", "url": "https://github.com/FabiSax12/tec-horarios", "label": "Ver código" },
       { "type": "demo", "url": "https://tec-horarios.fabian-vargas.com", "label": "Demo en vivo" }
     ],
     "image": "/projects/tec-horarios/demo.png",

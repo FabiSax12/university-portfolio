@@ -1,7 +1,10 @@
 ---
 import { Mail, Linkedin, Send, Copy, Github } from "lucide-astro";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   email?: string;
   linkedin?: string;
   github?: string;
@@ -11,20 +14,23 @@ interface Props {
   footerText?: string;
 }
 
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
+
 const {
   email = "fabidev18@gmail.com",
   linkedin = "https://www.linkedin.com/in/fabian-va/",
   github = "https://github.com/FabiSax12",
   linkedinUsername = "@fabian-va",
   githubUsername = "@FabiSax12",
-  description = "Si deseas ponerte en contacto conmigo, puedes utilizar los siguientes métodos:",
-  footerText = "Si tienes alguna pregunta o deseas colaborar, no dudes en contactarme. Estoy aquí para ayudarte y responder a tus inquietudes."
-} = Astro.props;
+  description = t.contact.DESCRIPTION,
+  footerText = t.contact.FOOTER_TEXT,
+} = otherProps;
 
 const contactMethods = [
   {
     icon: Mail,
-    title: "Email",
+    title: t.contact.EMAIL_LABEL,
     value: email,
     displayValue: email,
     copyValue: email,
@@ -33,7 +39,7 @@ const contactMethods = [
   },
   {
     icon: Linkedin,
-    title: "LinkedIn",
+    title: t.contact.LINKEDIN_LABEL,
     value: linkedinUsername,
     displayValue: linkedinUsername,
     copyValue: linkedinUsername,
@@ -42,7 +48,7 @@ const contactMethods = [
   },
   {
     icon: Github,
-    title: "GitHub",
+    title: t.contact.GITHUB_LABEL,
     value: githubUsername,
     displayValue: githubUsername,
     copyValue: githubUsername,

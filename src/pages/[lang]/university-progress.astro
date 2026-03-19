@@ -1,0 +1,21 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import UniversityProgressComponent from "@/components/sections/UniversityProgress.astro";
+import { LANGUAGES, type Language } from "@/features/i18n";
+
+export async function getStaticPaths() {
+    return [
+        { params: { lang: LANGUAGES.ES } },
+        { params: { lang: LANGUAGES.EN } },
+    ];
+}
+
+const { lang } = Astro.params;
+
+// Validate lang parameter
+const language = (lang === LANGUAGES.EN || lang === LANGUAGES.ES) ? lang as Language : LANGUAGES.ES;
+---
+
+<MainLayout lang={language}>
+    <UniversityProgressComponent lang={language} />
+</MainLayout>

@@ -1,0 +1,62 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import Hero from "@/components/sections/Hero.astro";
+import TechStack from "@/components/sections/TechStack.astro";
+import UniversityProgress from "@/components/sections/UniversityProgress.astro";
+import ContactDialog from "@/components/contact-dialog/ContactDialog.astro";
+import BuildingMessage from "@/components/sections/BuildingMessage.astro";
+import Projects from "@/components/sections/Projects.astro";
+import { GraduationCap } from "lucide-astro";
+import { ALL_TRANSLATIONS } from "@/features/i18n/domain/translations";
+import { LANGUAGES, type Language, type TranslationKey } from "@/features/i18n";
+
+export async function getStaticPaths() {
+	return [
+		{ params: { lang: LANGUAGES.ES } },
+		{ params: { lang: LANGUAGES.EN } },
+	];
+}
+
+const { lang } = Astro.params as { lang: Language };
+
+if (!Object.values(LANGUAGES).includes(lang)) {
+	throw new Error(`Unsupported language: ${lang}`);
+}
+
+const language = lang;
+const t = ALL_TRANSLATIONS[language];
+---
+
+<MainLayout lang={language}>
+	<Hero lang={language} />
+	<TechStack lang={language} />
+	<Projects lang={language} />
+	<!-- <UniversityProgress /> -->
+	<a
+		href="university-progress"
+		rel="noopener noreferrer"
+		class="text-center mb-16"
+	>
+		<div class="flex items-center justify-center mb-6">
+			<div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
+				<GraduationCap
+					class="w-8 h-8 text-violet-600 dark:text-violet-400"
+				/>
+			</div>
+		</div>
+
+		<h2
+			class="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4"
+		>
+			{t.pages.HOME.SEE_MORE_ABOUT_MY_UNIVERSITY_PROGRESS}
+		</h2>
+
+		<p
+			class="text-lg text-violet-600 dark:text-violet-400 font-medium mb-6"
+		>
+			{t.pages.HOME.BACHELOR_OF_ENGINEERING_IN_COMPUTER_SCIENCE}
+		</p>
+	</a>
+	<ContactDialog lang={language} />
+	<BuildingMessage lang={language} />
+</MainLayout>

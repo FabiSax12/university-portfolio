@@ -1,6 +1,8 @@
 ---
 import { CheckCircle, Clock, Circle, BookOpen } from "lucide-astro";
 import type { Course } from "@/data/university-progress";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
   course: Course;
@@ -10,9 +12,11 @@ interface Props {
     bg: string;
     border: string;
   };
+  lang: Language;
 }
 
-const { course, categoryColor } = Astro.props;
+const { course, categoryColor, lang } = Astro.props;
+const t = getTranslation(lang);
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -50,11 +54,11 @@ const getStatusBg = (status: string) => {
 const getStatusText = (status: string) => {
   switch (status) {
     case "completed":
-      return "Completada";
+      return t.university.COMPLETED_STATUS;
     case "current":
-      return "En Curso";
+      return t.university.IN_PROGRESS_STATUS;
     default:
-      return "Pendiente";
+      return t.university.PENDING_STATUS;
   }
 };
 
@@ -98,7 +102,7 @@ const StatusIcon = getStatusIcon(course.status);
             course.credits && (
               <div class="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
                 <BookOpen class="w-3 h-3" />
-                <span>{course.credits} créditos</span>
+                <span>{course.credits} {t.university.CREDITS_LABEL.toLowerCase()}</span>
               </div>
             )
           }

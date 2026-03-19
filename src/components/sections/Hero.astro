@@ -2,8 +2,11 @@
 import ProfileImage from "../hero/ProfileImage.astro";
 import ActionButtons from "../hero/ActionButtons.astro";
 import SocialLinks from "../hero/SocialLinks.astro";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   name?: string;
   title?: string;
   description?: string;
@@ -11,13 +14,16 @@ interface Props {
   cvUrl?: string;
 }
 
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
+
 const {
-  name = "Fabián",
-  title = "Estudiante de Ingeniería en Computación y Desarrollador Web Full Stack",
-  description = "Soy un apasionado de construir con arquitecturas modernas y la escalabilidad. Amo la Programación Orientada a Objetos, los principios SOLID y el Clean Code. Experimentado con React, TypeScript, Node.js y frameworks backend de NodeJs.",
+  name = t.hero.NAME,
+  title = t.hero.TITLE,
+  description = t.hero.DESCRIPTION,
   profileImage = "/Yo.jpg",
-  cvUrl = "/docs/es/CV - Fabian Vargas.pdf",
-} = Astro.props;
+  cvUrl = `/docs/${lang}/CV - Fabian Vargas.pdf`,
+} = otherProps;
 ---
 
 <div class="min-h-dvh flex flex-col pt-16 sm:pt-8">
@@ -32,7 +38,7 @@ const {
         <h1
           class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-zinc-900 dark:text-white leading-tight flex flex-wrap items-baseline gap-x-2 gap-y-1 justify-center lg:justify-start"
         >
-          <span class="whitespace-nowrap">Hola, Soy</span>
+          <span class="whitespace-nowrap">{t.hero.GREETING}</span>
           <span class="whitespace-nowrap text-violet-600 dark:text-violet-400"
             >{name}</span
           >
@@ -51,11 +57,11 @@ const {
         {description}
       </p>
 
-      <ActionButtons cvUrl={cvUrl} />
+      <ActionButtons lang={lang} cvUrl={cvUrl} />
       <SocialLinks />
     </div>
 
     <!-- Profile Image -->
-    <ProfileImage src={profileImage} alt="Foto de perfil" />
+    <ProfileImage src={profileImage} alt={t.common.ARIA_PROFILE_IMAGE as string} />
   </div>
 </div>

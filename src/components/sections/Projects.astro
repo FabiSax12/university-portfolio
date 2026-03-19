@@ -10,25 +10,31 @@ import {
 import ProjectCard from "@/components/projects/ProjectCard.astro";
 import Link from "@/components/ui/Link.astro";
 import {
-  projects,
-  getFeaturedProjects,
   getProjectStats,
 } from "@/data/projects";
+import { getLocalizedProjects } from "@/data/getLocalizedProjects";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
+import type { Language } from "@/features/i18n/config/languages";
 
 interface Props {
+  lang: Language;
   title?: string;
   subtitle?: string;
   showAll?: boolean;
 }
 
-const {
-  title = "Proyectos Destacados",
-  subtitle = "Soluciones reales que demuestran mi experiencia técnica",
-  showAll = false,
-} = Astro.props;
+const { lang, ...otherProps } = Astro.props;
+const t = getTranslation(lang);
 
-const featuredProjects = getFeaturedProjects();
-const displayProjects = showAll ? projects : featuredProjects;
+const {
+  title = t.projects.TITLE,
+  subtitle = t.projects.SUBTITLE,
+  showAll = false,
+} = otherProps;
+
+const localizedProjects = getLocalizedProjects(lang);
+const featuredProjects = localizedProjects.sort((a, b) => a.priority - b.priority).slice(0, 3);
+const displayProjects = showAll ? localizedProjects : featuredProjects;
 const stats = getProjectStats();
 ---
 
@@ -55,10 +61,7 @@ const stats = getProjectStats();
       <p
         class="text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed mb-8"
       >
-        Cada proyecto refleja mi enfoque en resolver problemas reales con
-        soluciones técnicas elegantes. Me concentro en escribir código limpio,
-        escalable y bien documentado que genere valor real para usuarios y
-        negocios.
+        {t.projects.INTRO_PARAGRAPH}
       </p>
 
       <!-- Quick Stats -->
@@ -68,7 +71,7 @@ const stats = getProjectStats();
             {stats.completed}
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Completados
+            {t.projects.COMPLETED_LABEL}
           </div>
         </div>
 
@@ -77,7 +80,7 @@ const stats = getProjectStats();
             {stats.inProgress}
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            En desarrollo
+            {t.projects.IN_PROGRESS_LABEL}
           </div>
         </div>
 
@@ -86,7 +89,7 @@ const stats = getProjectStats();
             {stats.techCount}+
           </div>
           <div class="text-sm text-zinc-600 dark:text-zinc-400">
-            Tecnologías
+            {t.projects.TECHNOLOGIES_LABEL}
           </div>
         </div>
 
@@ -112,14 +115,13 @@ const stats = getProjectStats();
               <Target class="w-5 h-5 text-violet-600 dark:text-violet-400" />
             </div>
             <h3 class="font-semibold text-violet-900 dark:text-violet-100">
-              Orientado a Problemas
+              {t.projects.PROBLEM_ORIENTED_TITLE}
             </h3>
           </div>
           <p
             class="text-sm text-violet-700 dark:text-violet-300 leading-relaxed"
           >
-            Cada proyecto nace de un problema real. Primero entiendo el contexto
-            de negocio y luego elijo la tecnología más adecuada.
+            {t.projects.PROBLEM_ORIENTED_DESC}
           </p>
         </div>
 
@@ -131,12 +133,11 @@ const stats = getProjectStats();
               <Rocket class="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
             <h3 class="font-semibold text-blue-900 dark:text-blue-100">
-              Producción Ready
+              {t.projects.PRODUCTION_READY_TITLE}
             </h3>
           </div>
           <p class="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
-            Tests, documentación, CI/CD, monitoreo. Mis proyectos están listos
-            para escalar en producción, no son solo demos.
+            {t.projects.PRODUCTION_READY_DESC}
           </p>
         </div>
 
@@ -148,12 +149,11 @@ const stats = getProjectStats();
               <TrendingUp class="w-5 h-5 text-green-600 dark:text-green-400" />
             </div>
             <h3 class="font-semibold text-green-900 dark:text-green-100">
-              Impacto Medible
+              {t.projects.MEASURABLE_IMPACT_TITLE}
             </h3>
           </div>
           <p class="text-sm text-green-700 dark:text-green-300 leading-relaxed">
-            Incluyo métricas reales: performance, conversión, tiempo de
-            desarrollo. El código debe generar valor tangible.
+            {t.projects.MEASURABLE_IMPACT_DESC}
           </p>
         </div>
       </div>
@@ -167,10 +167,10 @@ const stats = getProjectStats();
           <div>
             <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
               <span>🌟</span>
-              Proyecto Destacado
+              {t.projects.FEATURED_PROJECT}
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <ProjectCard project={featuredProjects[0]} featured={true} />
+              <ProjectCard project={featuredProjects[0]} featured={true} lang={lang} />
             </div>
           </div>
         )
@@ -182,11 +182,11 @@ const stats = getProjectStats();
           <div>
             <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
               <span>🚀</span>
-              {showAll ? "Todos los Proyectos" : "Otros Proyectos"}
+              {showAll ? t.projects.ALL_PROJECTS : t.projects.OTHER_PROJECTS}
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {displayProjects.slice(1).map((project) => (
-                <ProjectCard project={project} />
+                <ProjectCard project={project} lang={lang} />
               ))}
             </div>
           </div>
@@ -201,13 +201,11 @@ const stats = getProjectStats();
       >
         <div class="max-w-2xl mx-auto space-y-6">
           <h3 class="text-2xl font-bold text-zinc-900 dark:text-white">
-            ¿Interesado en colaborar?
+            {t.projects.COLLABORATE_QUESTION}
           </h3>
 
           <p class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Estoy siempre abierto a nuevos desafíos técnicos y oportunidades de
-            crear soluciones. Si tienes un proyecto en mente o quieres ver más
-            de mi trabajo, no dudes en contactarme.
+            {t.projects.COLLABORATE_DESCRIPTION}
           </p>
 
           <div class="flex flex-wrap justify-center gap-4">
@@ -217,14 +215,14 @@ const stats = getProjectStats();
               class="group"
             >
               <Github class="w-4 h-4 mr-2" />
-              Ver más en GitHub
+              {t.projects.VIEW_GITHUB}
               <ExternalLink
                 class="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
               />
             </Link>
 
             <Link href="mailto:fabidev18@gmail.com" variant="solid">
-              Conversemos sobre tu proyecto
+              {t.projects.TALK_PROJECT}
             </Link>
           </div>
         </div>
