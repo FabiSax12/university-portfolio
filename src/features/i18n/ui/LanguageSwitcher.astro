@@ -21,11 +21,11 @@ const switchUrl = getRelativeLocaleUrl(otherLocale, pathWithoutLocale);
 ---
 
 <script>
-  import { track } from "@vercel/analytics";
+  import { trackEvent } from "@/lib/analytics";
 
   document.querySelector<HTMLAnchorElement>("[data-lang-switch]")?.addEventListener("click", (e) => {
     const el = e.currentTarget as HTMLAnchorElement;
-    track("language_switch", { to: el.dataset.langSwitch! });
+    trackEvent("language_switch", { to: el.dataset.langSwitch! });
   });
 </script>
 

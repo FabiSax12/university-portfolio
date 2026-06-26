@@ -130,7 +130,7 @@ const contactMethods = [
 
 <script>
 import { cn } from "@/lib/utils";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 
   declare global {
     interface Window {
@@ -153,7 +153,7 @@ import { track } from "@vercel/analytics";
         link.addEventListener("click", () => {
           const href = link.getAttribute("href") ?? "";
           const type = href.startsWith("mailto:") ? "email" : href.includes("linkedin") ? "linkedin" : "github";
-          track("contact_link_click", { type });
+          trackEvent("contact_link_click", { type });
         });
       });
     }
@@ -177,7 +177,7 @@ import { track } from "@vercel/analytics";
           try {
             await this.copyToClipboard(textToCopy);
             this.showSuccessAnimation(button);
-            track("contact_copy", { type: copyType ?? "unknown" });
+            trackEvent("contact_copy", { type: copyType ?? "unknown" });
           } catch (error) {
             this.showErrorAnimation(button);
             console.error('Error al copiar:', error);

@@ -72,6 +72,16 @@ const links = [
       name="description"
       content="Todos los links de Fabian Vargas — Desarrollador Web Full Stack"
     />
+    <script>
+      import { initAnalytics, trackEvent } from "@/lib/analytics";
+      initAnalytics();
+      document.querySelectorAll<HTMLAnchorElement>(".link-card").forEach((el) => {
+        el.addEventListener("click", () => {
+          const title = el.querySelector(".link-title")?.textContent?.trim() ?? "unknown";
+          trackEvent("links_link_click", { link: title });
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="page-wrap">

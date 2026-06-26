@@ -40,16 +40,18 @@ const t = getTranslation(lang);
 </nav>
 
 <script>
+  import { trackEvent } from "@/lib/analytics";
+
   const themeButton = document.getElementById("theme-toggle");
 
   themeButton?.addEventListener("click", () => {
     document.documentElement.classList.toggle("dark");
 
-    // Save the theme preference in localStorage
     const currentTheme = document.documentElement.classList.contains("dark")
       ? "dark"
       : "light";
 
     localStorage.setItem("theme", currentTheme);
+    trackEvent("theme_toggle", { theme: currentTheme });
   });
 </script>

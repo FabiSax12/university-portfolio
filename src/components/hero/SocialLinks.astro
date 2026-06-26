@@ -4,11 +4,11 @@ import { socialLinks } from "@/data/social-links";
 ---
 
 <script>
-  import { track } from "@vercel/analytics";
+  import { trackEvent } from "@/lib/analytics";
 
   document.querySelectorAll<HTMLAnchorElement>("[data-social-platform]").forEach((el) => {
     el.addEventListener("click", () => {
-      track("social_link_click", { platform: el.dataset.socialPlatform!, location: el.dataset.socialLocation ?? "hero" });
+      trackEvent("social_link_click", { platform: el.dataset.socialPlatform!, location: el.dataset.socialLocation ?? "hero" });
     });
   });
 </script>
