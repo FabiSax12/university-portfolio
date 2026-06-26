@@ -13,6 +13,16 @@ const { lang } = Astro.props;
 const t = getTranslation(lang);
 ---
 
+<script>
+  import { track } from "@vercel/analytics";
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-social-platform]").forEach((el) => {
+    el.addEventListener("click", () => {
+      track("social_link_click", { platform: el.dataset.socialPlatform!, location: el.dataset.socialLocation ?? "unknown" });
+    });
+  });
+</script>
+
 <footer
   class="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800"
 >
@@ -39,6 +49,8 @@ const t = getTranslation(lang);
                   variant="link"
                   target={external ? "_blank" : undefined}
                   aria-label={label}
+                  data-social-platform={label.toLowerCase()}
+                  data-social-location="footer"
                 >
                   <Icon class="w-4 h-4" />
                   {label}

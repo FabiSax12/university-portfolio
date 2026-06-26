@@ -4,6 +4,7 @@ import CourseCard from "./CourseCard.astro";
 import { getCategoryProgress } from "@/data/university-progress";
 import type { CourseCategory } from "@/data/university-progress";
 import type { Language } from "@/features/i18n";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
 
 interface Props {
   category: CourseCategory;
@@ -12,12 +13,8 @@ interface Props {
 }
 
 const { category, index, lang } = Astro.props;
+const t = getTranslation(lang);
 const progress = getCategoryProgress(category);
-const progressBarColorFrom = category.color.primary.replace('text-', 'from-').replace('dark:text-', 'dark:from-');
-const progressBarColorTo = category.color.secondary.replace('text-', 'to-').replace('dark:text-', 'dark:to-');
-
-
-console.log(category.color.primary)
 ---
 
 <div>
@@ -50,7 +47,7 @@ console.log(category.color.primary)
               {category.name}
             </h3>
             <p class="text-sm text-zinc-600 dark:text-zinc-400">
-              {progress.completed} {lang === 'es' ? 'de' : 'of'} {progress.total} {lang === 'es' ? 'materias' : 'courses'}
+              {progress.completed} {t.university.OF_TOTAL} {progress.total} {t.university.COURSES_LABEL}
             </p>
           </div>
         </div>
@@ -60,7 +57,7 @@ console.log(category.color.primary)
             {progress.percentage}%
           </div>
           <div class="text-sm text-zinc-500 dark:text-zinc-400">
-            {lang === 'es' ? 'completado' : 'completed'}
+            {t.university.COMPLETED_PCT}
           </div>
         </div>
       </div>
@@ -76,9 +73,9 @@ console.log(category.color.primary)
         </div>
 
         <div class="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
-          <span>{progress.completed} {lang === 'es' ? 'completadas' : 'completed'}</span>
-          <span>{progress.current} {lang === 'es' ? 'en curso' : 'in progress'}</span>
-          <span>{progress.pending} {lang === 'es' ? 'pendientes' : 'pending'}</span>
+          <span>{progress.completed} {t.university.COMPLETED_COURSES}</span>
+          <span>{progress.current} {t.university.IN_PROGRESS_COURSES}</span>
+          <span>{progress.pending} {t.university.PENDING_COURSES}</span>
         </div>
       </div>
     </div>
@@ -93,7 +90,7 @@ console.log(category.color.primary)
         aria-controls={`courses-${index}`}
       >
         <span class={`font-medium ${category.color.primary}`}>
-          {lang === 'es' ? 'Ver Materias' : 'View Courses'} ({category.courses.length})
+          {t.university.VIEW_COURSES} ({category.courses.length})
         </span>
         <ChevronDown class={`w-5 h-5 ${category.color.primary} transition-transform duration-300 toggle-icon`} />
       </button>

@@ -5,12 +5,16 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"button"> {
   isDialogTrigger?: boolean;
   dialogId?: string;
+  analyticsEvent?: string;
+  analyticsData?: Record<string, string>;
 }
 
 const {
   class: className,
   dialogId,
   isDialogTrigger = false,
+  analyticsEvent,
+  analyticsData,
   ...props
 } = Astro.props;
 ---
@@ -28,13 +32,15 @@ const {
   <slot name="end" />
 </button>
 
-<script is:inline define:vars={{ dialogId, isDialogTrigger }}>
+<script is:inline define:vars={{ dialogId, isDialogTrigger, analyticsEvent, analyticsData }}>
   if (isDialogTrigger) {
     const triggerButton = document.getElementById(`trigger-dialog-${dialogId}`);
     triggerButton.addEventListener("click", () => {
       if (window[`openDialog${dialogId}`]) {
-        console.log(`Opening dialog with ID: ${dialogId}`);
         window[`openDialog${dialogId}`]();
+      }
+      if (analyticsEvent) {
+        window.va?.('event', { name: analyticsEvent, data: analyticsData ?? {} });
       }
     });
   }

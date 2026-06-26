@@ -24,15 +24,28 @@ const {
 } = otherProps;
 ---
 
+<script>
+  import { track } from "@vercel/analytics";
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-analytics-event]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const event = el.dataset.analyticsEvent!;
+      const lang = el.dataset.analyticsLang;
+      track(event, lang ? { lang } : {});
+    });
+  });
+</script>
+
 <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
   <!-- Contact Button -->
-  <Button isDialogTrigger dialogId="contact">
+  <Button isDialogTrigger dialogId="contact" analyticsEvent="contact_open">
     <Mail class="w-4 h-4 mr-2" />
     {contactText}
   </Button>
 
   <!-- Download CV Button -->
-  <Link href={cvUrl} download={fileName}>
+  <Link href={cvUrl} data-analytics-event="cv_download" data-analytics-lang={lang}>
+    <!-- download={fileName}> -->
     <Download class="w-4 h-4 mr-2" />
     {downloadText}
   </Link>

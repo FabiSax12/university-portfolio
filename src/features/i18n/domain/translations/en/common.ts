@@ -40,4 +40,10 @@ export const COMMON_EN = Object.freeze({
   ARIA_OPEN_GITHUB: 'Open GitHub',
   ARIA_CLOSE_DIALOG: 'Close dialog',
   ARIA_PROFILE_IMAGE: 'Profile picture',
+
+  // Building message
+  BUILDING_TITLE: 'More sections under construction 🚧',
+  BUILDING_BODY_1: 'I am working to finish this section.',
+  BUILDING_BODY_2: 'Come back soon and it will be available for you.',
+  BUILDING_THANKS: 'Thank you for your patience!',
 });

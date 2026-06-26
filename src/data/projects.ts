@@ -1,5 +1,6 @@
 import { Code, Database, Globe, Users, Zap, Shield } from "lucide-astro";
 import type { Props } from "lucide-astro";
+import { techStack } from "./tech-stack";
 
 export interface TechStack {
   name: string;
@@ -125,7 +126,7 @@ export const projects: Project[] = [
     ],
     links: [
       { type: 'github', url: 'https://github.com/FabiSax12/fob-landing', label: 'Ver código' },
-      { type: 'demo', url: 'https://florenciaorquestaband.com', label: 'Web Oficial' }
+      { type: 'demo', url: 'https://florenciaorquestaband.vercel.app', label: 'Web Oficial' }
     ],
     image: "/projects/fob/demo.png",
     imageAlt: "Landing del grupo de música en vivo Florencia Orquesta Band",
@@ -138,42 +139,81 @@ export const projects: Project[] = [
     priority: 2
   },
   {
-    id: "dev-plan-kit",
-    title: "DevPlanKit",
-    subtitle: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    description: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    problem: "",
-    solution: "",
+    id: "karma-forge",
+    title: "Karma Forge",
+    subtitle: "Landing Page para Agencia de Automatización | Frontend",
+    description: "Landing page para Karma Forge, agencia costarricense que transforma procesos manuales en soluciones digitales automatizadas para PYMEs. El sitio comunica tres paquetes de servicios con diseño orientado a conversión y posicionamiento SEO.",
+    problem: "Las PYMEs de Costa Rica enfrentan invisibilidad en buscadores, pérdida de clientes por falta de disponibilidad 24/7 y operaciones caóticas en papel y Excel que consumen tiempo valioso en tareas manuales repetitivas.",
+    solution: "Desarrollé una landing page con Astro orientada a conversión, que presenta de forma clara la propuesta de valor de la agencia: tres paquetes de servicios (Presencia Digital, Negocio Conectado y Sistema Interno), con animaciones, SEO base y diseño responsivo mobile-first.",
     techStack: [
-      { name: "React", icon: "/icons/skills/react.svg" },
+      { name: "Astro", icon: "/icons/skills/astro.svg" },
       { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
-      { name: "TansTack Start", icon: "/icons/skills/react.svg" },
-      { name: "Vercel AI SDK", icon: "/icons/skills/vercel.svg" },
+      { name: "Tailwind CSS", icon: "/icons/skills/tailwind.svg" },
     ],
     features: [
-      "Separación entre 'Ideas' y 'Proyectos' para un mejor desarrollo de conceptos.",
-      "Integración de IA para redacción de requerimientos y brainstorming.",
-      "Interfaz intuitiva y fácil de usar para gestionar proyectos.",
+      "Diseño mobile-first con animaciones y transiciones suaves",
+      "Sección de servicios con tres paquetes claros y precios",
+      "Propuesta de valor orientada a conversión de PYMEs",
+      "Optimización SEO base para posicionamiento en buscadores",
+      "Integración visual de automatizaciones con N8N, IA y APIs de Meta",
+      "Implementación en 7–15 días hábiles como diferenciador clave",
     ],
     challenges: [
-
-    ],
-    metrics: [
-
+      "Comunicar una propuesta de valor técnica de forma simple y persuasiva para un público no técnico",
+      "Diseñar una arquitectura de información que guíe al usuario desde el problema hasta la solución",
+      "Lograr alto rendimiento y SEO con Astro en modo estático",
     ],
     links: [
-      { type: 'github', url: 'https://github.com/FabiSax12/devplankit', label: 'Ver código' },
-      { type: 'demo', url: 'https://devplankit.com', label: 'Web Oficial' }
+      // { "type": "github", "url": "https://github.com/FabiSax12/karma-forge", "label": "Ver código" },
+      { "type": "demo", "url": "https://karmaforge.vercel.app", "label": "Demo en vivo" }
     ],
-    image: "/projects/devplankit/demo.png",
-    imageAlt: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    status: 'in-progress',
-    category: 'fullstack',
-    startDate: "2026-01",
+    image: "/projects/karma-forge/demo.png",
+    imageAlt: "Landing page de Karma Forge mostrando el hero con el eslogan 'Si lo haces a mano, vuélvelo software'",
+    priority: 2,
+    role: "Frontend Developer",
+    startDate: "2026-04",
+    endDate: "2026-06",
+    status: "in-progress",
+    category: "frontend",
     teamSize: 1,
-    role: "Fullstack Developer",
-    priority: 3
-  },
+  }
+  // {
+  //   id: "dev-plan-kit",
+  //   title: "DevPlanKit",
+  //   subtitle: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   description: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   problem: "",
+  //   solution: "",
+  //   techStack: [
+  //     { name: "React", icon: "/icons/skills/react.svg" },
+  //     { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
+  //     { name: "TansTack Start", icon: "/icons/skills/react.svg" },
+  //     { name: "Vercel AI SDK", icon: "/icons/skills/vercel.svg" },
+  //   ],
+  //   features: [
+  //     "Separación entre 'Ideas' y 'Proyectos' para un mejor desarrollo de conceptos.",
+  //     "Integración de IA para redacción de requerimientos y brainstorming.",
+  //     "Interfaz intuitiva y fácil de usar para gestionar proyectos.",
+  //   ],
+  //   challenges: [
+
+  //   ],
+  //   metrics: [
+
+  //   ],
+  //   links: [
+  //     { type: 'github', url: 'https://github.com/FabiSax12/devplankit', label: 'Ver código' },
+  //     { type: 'demo', url: 'https://devplankit.com', label: 'Web Oficial' }
+  //   ],
+  //   image: "/projects/devplankit/demo.png",
+  //   imageAlt: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   status: 'in-progress',
+  //   category: 'fullstack',
+  //   startDate: "2026-01",
+  //   teamSize: 1,
+  //   role: "Fullstack Developer",
+  //   priority: 3
+  // },
   // {
   //   id: "task-api",
   //   title: "TaskFlow API",

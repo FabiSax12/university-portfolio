@@ -48,4 +48,7 @@ export const PROJECTS_EN = Object.freeze({
   FEATURES_SECTION: 'Features',
   CHALLENGES_SECTION: 'Technical Challenges',
   METRICS_SECTION: 'Metrics',
+
+  // Placeholders
+  PREVIEW_PLACEHOLDER: 'Project preview',
 });
