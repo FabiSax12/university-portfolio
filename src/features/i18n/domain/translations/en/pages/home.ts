@@ -1,7 +1,4 @@
 export const HOME_EN = Object.freeze({
-    METADATA: {},
-    TO_UNIVERSITY_PROGRESS_BUTTON: Object.freeze({
-        CALL_TO_ACTION: 'See more about my university progress',
-        SUBTITLE: 'Bachelor of Engineering in Computer Science'
-    })
+    SEE_MORE_ABOUT_MY_UNIVERSITY_PROGRESS: 'See more about my university progress',
+    BACHELOR_OF_ENGINEERING_IN_COMPUTER_SCIENCE: 'Bachelor of Engineering in Computer Science',
 });

@@ -1,16 +1,11 @@
 import type { Language } from '../config/languages';
 
 export interface TranslationObject {
-  [key: string]: string
-  // | (((...args: any[]) => string));
+  [key: string]: string;
 }
 
 export interface PagesTranslations {
   HOME: TranslationObject;
-  UNIVERSITY_PROGRESS: TranslationObject;
-  PROYECTS: {
-    PROYECT_ID: TranslationObject;
-  }
 }
 
 export interface Translations {

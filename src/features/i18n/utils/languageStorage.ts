@@ -5,7 +5,6 @@ const STORAGE_KEY = 'preferred-language';
 export const saveLanguagePreference = (language: Language): void => {
   if (typeof window !== 'undefined') {
     localStorage.setItem(STORAGE_KEY, language);
-    console.log("Saved language preference:", language);
   }
 };
 
