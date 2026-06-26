@@ -40,7 +40,7 @@ const {
         window[`openDialog${dialogId}`]();
       }
       if (analyticsEvent) {
-        window.va?.('event', { name: analyticsEvent, data: analyticsData ?? {} });
+        window.posthog?.capture(analyticsEvent, analyticsData ?? {});
       }
     });
   }

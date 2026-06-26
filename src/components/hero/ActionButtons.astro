@@ -25,13 +25,13 @@ const {
 ---
 
 <script>
-  import { track } from "@vercel/analytics";
+  import { trackEvent } from "@/lib/analytics";
 
   document.querySelectorAll<HTMLAnchorElement>("[data-analytics-event]").forEach((el) => {
     el.addEventListener("click", () => {
       const event = el.dataset.analyticsEvent!;
       const lang = el.dataset.analyticsLang;
-      track(event, lang ? { lang } : {});
+      trackEvent(event, lang ? { lang } : {});
     });
   });
 </script>

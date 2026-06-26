@@ -80,13 +80,11 @@ const formatDate = (dateString: string) => {
 ---
 
 <script>
-  import { track } from "@vercel/analytics";
+  import { trackEvent } from "@/lib/analytics";
 
   document.querySelectorAll<HTMLAnchorElement>("[data-track-project]").forEach((el) => {
     el.addEventListener("click", () => {
-      const project = el.dataset.trackProject!;
-      const action = el.dataset.trackAction!;
-      track("project_link_click", { project, action });
+      trackEvent("project_link_click", { project: el.dataset.trackProject!, action: el.dataset.trackAction! });
     });
   });
 </script>

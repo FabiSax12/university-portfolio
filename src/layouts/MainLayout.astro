@@ -64,4 +64,9 @@ const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
   </body>
   <Analytics />
   <SpeedInsights />
+  <script>
+    import { initAnalytics } from "@/lib/analytics";
+    initAnalytics();
+    document.addEventListener("astro:page-load", initAnalytics);
+  </script>
 </html>

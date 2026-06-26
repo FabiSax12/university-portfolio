@@ -27,6 +27,13 @@ const language = lang;
 const t = ALL_TRANSLATIONS[language];
 ---
 
+<script>
+  import { trackEvent } from "@/lib/analytics";
+  document.querySelector<HTMLAnchorElement>("[data-track-university]")?.addEventListener("click", () => {
+    trackEvent("university_progress_click");
+  });
+</script>
+
 <MainLayout lang={language}>
 	<Hero lang={language} />
 	<TechStack lang={language} />
@@ -35,6 +42,7 @@ const t = ALL_TRANSLATIONS[language];
 	<a
 		href={`/${language}/university-progress`}
 		class="text-center mb-16"
+		data-track-university="true"
 	>
 		<div class="flex items-center justify-center mb-6">
 			<div class="p-3 bg-violet-100 dark:bg-violet-900/30 rounded-full">
