@@ -3,6 +3,16 @@ import Link from "../ui/Link.astro";
 import { socialLinks } from "@/data/social-links";
 ---
 
+<script>
+  import { track } from "@vercel/analytics";
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-social-platform]").forEach((el) => {
+    el.addEventListener("click", () => {
+      track("social_link_click", { platform: el.dataset.socialPlatform!, location: el.dataset.socialLocation ?? "hero" });
+    });
+  });
+</script>
+
 <div class="flex items-center justify-center lg:justify-start gap-4 pt-4">
   {
     socialLinks.map(({ href, icon: Icon, label, external }) => (
@@ -12,6 +22,8 @@ import { socialLinks } from "@/data/social-links";
         target={external ? "_blank" : undefined}
         aria-label={label}
         class="text-zinc-600 dark:text-zinc-400"
+        data-social-platform={label.toLowerCase()}
+        data-social-location="hero"
       >
         <Icon class="w-5 h-5 sm:w-6 sm:h-6" />
       </Link>

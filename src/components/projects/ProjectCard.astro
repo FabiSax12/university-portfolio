@@ -79,6 +79,18 @@ const formatDate = (dateString: string) => {
 };
 ---
 
+<script>
+  import { track } from "@vercel/analytics";
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-track-project]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const project = el.dataset.trackProject!;
+      const action = el.dataset.trackAction!;
+      track("project_link_click", { project, action });
+    });
+  });
+</script>
+
 <article
   class={`group relative bg-white dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-2 hover:border-violet-300 dark:hover:border-violet-600 ${
     featured ? "lg:col-span-2" : ""
@@ -312,6 +324,8 @@ const formatDate = (dateString: string) => {
           href={`/${lang}/projects/${project.id}`}
           variant="hoverEffect"
           class="flex-1 min-w-[120px] text-center"
+          data-track-project={project.id}
+          data-track-action="view_details"
         >
           <Eye class="w-4 h-4 mr-2" />
           {t.projects.MORE_DETAILS}
@@ -324,6 +338,8 @@ const formatDate = (dateString: string) => {
                 href={link.url}
                 variant="hoverEffect"
                 class="flex-1 min-w-[120px] text-center"
+                data-track-project={project.id}
+                data-track-action={link.type}
               >
                 <LinkIcon class="w-4 h-4 mr-2" />
                 {link.label}

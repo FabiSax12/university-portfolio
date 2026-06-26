@@ -2,6 +2,7 @@
 import Header from "@/components/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { getTranslation } from "@/features/i18n/domain/getTranslation";
 import type { Language } from "@/features/i18n/config/languages";
 import "../styles/global.css";
@@ -12,7 +13,11 @@ interface Props {
   lang: Language; // REQUIRED prop for [lang] routing
 }
 
-const { lang, title: customTitle, description: customDescription } = Astro.props;
+const {
+  lang,
+  title: customTitle,
+  description: customDescription,
+} = Astro.props;
 
 // Use lang prop as the language
 const language = lang;
@@ -31,12 +36,16 @@ const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
     <title>{title}</title>
     <meta name="description" content={description} />
     <style is:inline>
-      html:not([data-theme-initialized]) { visibility: hidden; }
+      html:not([data-theme-initialized]) {
+        visibility: hidden;
+      }
     </style>
     <script is:inline>
       (function () {
         const theme = localStorage.getItem("theme");
-        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const systemDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         if (theme === "dark" || (!theme && systemDark)) {
           document.documentElement.classList.add("dark");
         }
@@ -54,4 +63,5 @@ const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
     <Footer lang={language} />
   </body>
   <Analytics />
+  <SpeedInsights />
 </html>
