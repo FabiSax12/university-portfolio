@@ -2,12 +2,14 @@
 import { Sun, Moon } from "lucide-astro";
 import LanguageSwitcher from "@/features/i18n/ui/LanguageSwitcher.astro";
 import type { Language } from "@/features/i18n";
+import { getTranslation } from "@/features/i18n/domain/getTranslation";
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+const t = getTranslation(lang);
 ---
 
 <nav
@@ -27,7 +29,7 @@ const { lang } = Astro.props;
           id="theme-toggle"
           type="button"
           class="p-2 rounded-lg bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700"
-          aria-label="Cambiar tema"
+          aria-label={t.common.ARIA_CHANGE_THEME}
         >
           <Sun class="w-5 h-5 text-amber-500 hidden dark:block" />
           <Moon class="w-5 h-5 text-violet-600 block dark:hidden" />

@@ -33,7 +33,6 @@ const {
     const triggerButton = document.getElementById(`trigger-dialog-${dialogId}`);
     triggerButton.addEventListener("click", () => {
       if (window[`openDialog${dialogId}`]) {
-        console.log(`Opening dialog with ID: ${dialogId}`);
         window[`openDialog${dialogId}`]();
       }
     });
