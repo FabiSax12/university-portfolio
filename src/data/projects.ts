@@ -1,5 +1,6 @@
 import { Code, Database, Globe, Users, Zap, Shield } from "lucide-astro";
 import type { Props } from "lucide-astro";
+import { techStack } from "./tech-stack";
 
 export interface TechStack {
   name: string;
@@ -125,7 +126,7 @@ export const projects: Project[] = [
     ],
     links: [
       { type: 'github', url: 'https://github.com/FabiSax12/fob-landing', label: 'Ver código' },
-      { type: 'demo', url: 'https://florenciaorquestaband.com', label: 'Web Oficial' }
+      { type: 'demo', url: 'https://florenciaorquestaband.vercel.app', label: 'Web Oficial' }
     ],
     image: "/projects/fob/demo.png",
     imageAlt: "Landing del grupo de música en vivo Florencia Orquesta Band",
@@ -138,42 +139,65 @@ export const projects: Project[] = [
     priority: 2
   },
   {
-    id: "dev-plan-kit",
-    title: "DevPlanKit",
-    subtitle: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    description: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    problem: "",
-    solution: "",
-    techStack: [
-      { name: "React", icon: "/icons/skills/react.svg" },
-      { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
-      { name: "TansTack Start", icon: "/icons/skills/react.svg" },
-      { name: "Vercel AI SDK", icon: "/icons/skills/vercel.svg" },
-    ],
-    features: [
-      "Separación entre 'Ideas' y 'Proyectos' para un mejor desarrollo de conceptos.",
-      "Integración de IA para redacción de requerimientos y brainstorming.",
-      "Interfaz intuitiva y fácil de usar para gestionar proyectos.",
-    ],
-    challenges: [
-
-    ],
-    metrics: [
-
-    ],
+    id: "karma-forge",
+    title: "Karma Forge",
+    category: "frontend",
+    challenges: [],
+    description: "",
+    features: [],
+    image: "",
+    imageAlt: "",
     links: [
-      { type: 'github', url: 'https://github.com/FabiSax12/devplankit', label: 'Ver código' },
-      { type: 'demo', url: 'https://devplankit.com', label: 'Web Oficial' }
+      // { "type": "github", "url": "https://github.com/FabiSax12/karma-forge", "label": "Ver código" },
+      { "type": "demo", "url": "https://karmaforge.vercel.app", "label": "Demo en vivo" }
     ],
-    image: "/projects/devplankit/demo.png",
-    imageAlt: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
-    status: 'in-progress',
-    category: 'fullstack',
-    startDate: "2026-01",
-    teamSize: 1,
-    role: "Fullstack Developer",
-    priority: 3
-  },
+    priority: 2,
+    problem: "",
+    role: "Developer",
+    solution: "",
+    startDate: "2026-04",
+    endDate: "2026-06",
+    status: "in-progress",
+    subtitle: "",
+    techStack: [{ name: "Astro", icon: "/icons/skills/astro.svg" }]
+  }
+  // {
+  //   id: "dev-plan-kit",
+  //   title: "DevPlanKit",
+  //   subtitle: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   description: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   problem: "",
+  //   solution: "",
+  //   techStack: [
+  //     { name: "React", icon: "/icons/skills/react.svg" },
+  //     { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
+  //     { name: "TansTack Start", icon: "/icons/skills/react.svg" },
+  //     { name: "Vercel AI SDK", icon: "/icons/skills/vercel.svg" },
+  //   ],
+  //   features: [
+  //     "Separación entre 'Ideas' y 'Proyectos' para un mejor desarrollo de conceptos.",
+  //     "Integración de IA para redacción de requerimientos y brainstorming.",
+  //     "Interfaz intuitiva y fácil de usar para gestionar proyectos.",
+  //   ],
+  //   challenges: [
+
+  //   ],
+  //   metrics: [
+
+  //   ],
+  //   links: [
+  //     { type: 'github', url: 'https://github.com/FabiSax12/devplankit', label: 'Ver código' },
+  //     { type: 'demo', url: 'https://devplankit.com', label: 'Web Oficial' }
+  //   ],
+  //   image: "/projects/devplankit/demo.png",
+  //   imageAlt: "Dashboard para controlar proyectos de desarrollo y producción, IA integrada para redaccion de requerimientos y brainstorming.",
+  //   status: 'in-progress',
+  //   category: 'fullstack',
+  //   startDate: "2026-01",
+  //   teamSize: 1,
+  //   role: "Fullstack Developer",
+  //   priority: 3
+  // },
   // {
   //   id: "task-api",
   //   title: "TaskFlow API",
