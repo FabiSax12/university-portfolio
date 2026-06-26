@@ -141,25 +141,41 @@ export const projects: Project[] = [
   {
     id: "karma-forge",
     title: "Karma Forge",
-    category: "frontend",
-    challenges: [],
-    description: "",
-    features: [],
-    image: "",
-    imageAlt: "",
+    subtitle: "Landing Page para Agencia de Automatización | Frontend",
+    description: "Landing page para Karma Forge, agencia costarricense que transforma procesos manuales en soluciones digitales automatizadas para PYMEs. El sitio comunica tres paquetes de servicios con diseño orientado a conversión y posicionamiento SEO.",
+    problem: "Las PYMEs de Costa Rica enfrentan invisibilidad en buscadores, pérdida de clientes por falta de disponibilidad 24/7 y operaciones caóticas en papel y Excel que consumen tiempo valioso en tareas manuales repetitivas.",
+    solution: "Desarrollé una landing page con Astro orientada a conversión, que presenta de forma clara la propuesta de valor de la agencia: tres paquetes de servicios (Presencia Digital, Negocio Conectado y Sistema Interno), con animaciones, SEO base y diseño responsivo mobile-first.",
+    techStack: [
+      { name: "Astro", icon: "/icons/skills/astro.svg" },
+      { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
+      { name: "Tailwind CSS", icon: "/icons/skills/tailwind.svg" },
+    ],
+    features: [
+      "Diseño mobile-first con animaciones y transiciones suaves",
+      "Sección de servicios con tres paquetes claros y precios",
+      "Propuesta de valor orientada a conversión de PYMEs",
+      "Optimización SEO base para posicionamiento en buscadores",
+      "Integración visual de automatizaciones con N8N, IA y APIs de Meta",
+      "Implementación en 7–15 días hábiles como diferenciador clave",
+    ],
+    challenges: [
+      "Comunicar una propuesta de valor técnica de forma simple y persuasiva para un público no técnico",
+      "Diseñar una arquitectura de información que guíe al usuario desde el problema hasta la solución",
+      "Lograr alto rendimiento y SEO con Astro en modo estático",
+    ],
     links: [
       // { "type": "github", "url": "https://github.com/FabiSax12/karma-forge", "label": "Ver código" },
       { "type": "demo", "url": "https://karmaforge.vercel.app", "label": "Demo en vivo" }
     ],
+    image: "/projects/karma-forge/demo.png",
+    imageAlt: "Landing page de Karma Forge mostrando el hero con el eslogan 'Si lo haces a mano, vuélvelo software'",
     priority: 2,
-    problem: "",
-    role: "Developer",
-    solution: "",
+    role: "Frontend Developer",
     startDate: "2026-04",
     endDate: "2026-06",
     status: "in-progress",
-    subtitle: "",
-    techStack: [{ name: "Astro", icon: "/icons/skills/astro.svg" }]
+    category: "frontend",
+    teamSize: 1,
   }
   // {
   //   id: "dev-plan-kit",
