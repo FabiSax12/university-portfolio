@@ -1,0 +1,390 @@
+---
+import { Github, Linkedin, Mail, Globe, FileText, Code2 } from "lucide-astro";
+import "../styles/global.css";
+
+const links = [
+  {
+    Icon: Globe,
+    title: "Portafolio",
+    subtitle: "Proyectos y experiencia universitaria",
+    cta: "Ver web",
+    href: "/",
+    external: false,
+  },
+  {
+    Icon: Github,
+    title: "GitHub",
+    subtitle: "@FabiSax12",
+    cta: "Ver perfil",
+    href: "https://github.com/FabiSax12",
+    external: true,
+  },
+  {
+    Icon: Linkedin,
+    title: "LinkedIn",
+    subtitle: "Fabian Vargas",
+    cta: "Conectar",
+    href: "https://www.linkedin.com/in/fabian-va",
+    external: true,
+  },
+  {
+    Icon: FileText,
+    title: "Currículum Vitae",
+    subtitle: "Desarrollador Full Stack · Ing. Computación",
+    cta: "Descargar",
+    href: "/docs/es/CV - Fabian Vargas.pdf",
+    external: false,
+  },
+  {
+    Icon: Mail,
+    title: "Email",
+    subtitle: "fabidev18@gmail.com",
+    cta: "Escribir",
+    href: "mailto:fabidev18@gmail.com",
+    external: false,
+  },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabian Vargas · Links</title>
+    <meta
+      name="description"
+      content="Todos los links de Fabian Vargas — Desarrollador Web Full Stack"
+    />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <div class="card">
+        <!-- Profile header -->
+        <header class="profile-header">
+          <div class="avatar-wrap">
+            <div class="avatar-glow" aria-hidden="true"></div>
+            <img
+              src="/Yo.jpg"
+              alt="Foto de perfil de Fabian Vargas"
+              class="avatar"
+              width="80"
+              height="80"
+            />
+          </div>
+
+          <div class="tags" aria-label="Áreas">
+            <span>FULLSTACK</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>WEB</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>OPEN SOURCE</span>
+          </div>
+
+          <h1>Fabian Vargas</h1>
+
+          <p class="bio">
+            Estudiante de Ingeniería en Computación y Desarrollador Web Full
+            Stack. Apasionado por el código limpio y las arquitecturas
+            escalables.
+          </p>
+        </header>
+
+        <!-- Link list -->
+        <nav aria-label="Links de Fabian">
+          <ul class="links-list">
+            {
+              links.map(({ Icon, title, subtitle, cta, href, external }, i) => (
+                <li style={`--i: ${i}`}>
+                  <a
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    class="link-card"
+                  >
+                    <div class="icon-wrap" aria-hidden="true">
+                      <Icon class="w-4 h-4 text-violet-400" />
+                    </div>
+                    <div class="link-text">
+                      <span class="link-title">{title}</span>
+                      <span class="link-sub">{subtitle}</span>
+                    </div>
+                    <span class="link-cta" aria-hidden="true">
+                      {cta}&nbsp;→
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <!-- Footer CTA -->
+        <footer class="card-footer">
+          <a href="mailto:fabidev18@gmail.com" class="email-cta">
+            ESCRÍBEME A MI EMAIL
+          </a>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* ── Base ──────────────────────────────────────────────── */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: #09090b;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: var(--default-font-family, system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ────────────────────────────────────────────── */
+  .page-wrap {
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  .card {
+    background: rgba(24, 24, 27, 0.9);
+    border: 1px solid rgba(63, 63, 70, 0.7);
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* ── Profile header ────────────────────────────────────── */
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+
+  .avatar-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.35) 0%,
+      transparent 70%
+    );
+    filter: blur(10px);
+  }
+
+  .avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    outline: 2px solid rgba(139, 92, 246, 0.45);
+    outline-offset: 3px;
+  }
+
+  .tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #a78bfa;
+  }
+
+  .dot {
+    color: #3f3f46;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 1.875rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.625rem;
+    text-wrap: balance;
+  }
+
+  .bio {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: #a1a1aa;
+    max-width: 300px;
+  }
+
+  /* ── Links ─────────────────────────────────────────────── */
+  .links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .links-list li {
+    animation: slide-up 0.4s ease-out both;
+    animation-delay: calc(0.1s + var(--i, 0) * 0.07s);
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 10px;
+    background: rgba(39, 39, 42, 0.65);
+    border: 1px solid rgba(63, 63, 70, 0.5);
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+  .link-card:hover {
+    background: rgba(109, 40, 217, 0.1);
+    border-color: rgba(139, 92, 246, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .link-card:hover .link-cta {
+    color: #a78bfa;
+  }
+
+  .link-card:focus-visible {
+    outline: 2px solid #7c3aed;
+    outline-offset: 2px;
+  }
+
+  .icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(109, 40, 217, 0.14);
+    flex-shrink: 0;
+  }
+
+  .link-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .link-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #f4f4f5;
+  }
+
+  .link-sub {
+    font-size: 0.75rem;
+    color: #71717a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-cta {
+    font-size: 0.75rem;
+    color: #71717a;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  /* ── Footer ────────────────────────────────────────────── */
+  .card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(63, 63, 70, 0.6);
+    text-align: center;
+  }
+
+  .email-cta {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: #52525b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .email-cta:hover {
+    color: #a78bfa;
+  }
+
+  /* ── Animations ────────────────────────────────────────── */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-wrap,
+    .links-list li {
+      animation: none;
+    }
+
+    .link-card {
+      transition: none;
+    }
+  }
+
+  /* ── Small screens ─────────────────────────────────────── */
+  @media (max-width: 400px) {
+    .card {
+      padding: 1.5rem 1.25rem;
+      border-radius: 16px;
+    }
+  }
+</style>
