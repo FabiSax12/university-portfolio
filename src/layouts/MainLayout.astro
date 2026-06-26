@@ -26,11 +26,23 @@ const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- <link rel="stylesheet" href="../styles/global.css" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <style is:inline>
+      html:not([data-theme-initialized]) { visibility: hidden; }
+    </style>
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem("theme");
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (theme === "dark" || (!theme && systemDark)) {
+          document.documentElement.classList.add("dark");
+        }
+        document.documentElement.setAttribute("data-theme-initialized", "true");
+      })();
+    </script>
   </head>
   <body
     class="grid grid-rows-[1fr_auto] min-h-dvh bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white antialiased"
@@ -43,36 +55,3 @@ const description = customDescription || t.metadata.PAGE_DESCRIPTION_DEFAULT;
   </body>
   <Analytics />
 </html>
-
-<script is:inline>
-  // Prevenir flash of unstyled content (FOUC)
-  (function () {
-    const theme = localStorage.getItem("theme");
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    // Determinar tema inicial
-    const isDark = theme === "dark" || (!theme && systemDark);
-
-    // Aplicar inmediatamente
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    }
-
-    // Marcar como inicializado para evitar flickering
-    document.documentElement.setAttribute("data-theme-initialized", "true");
-  })();
-</script>
-
-<!-- CSS para prevenir FOUC -->
-<style is:inline>
-  /* Ocultar contenido hasta que el tema esté inicializado */
-  html:not([data-theme-initialized]) {
-    visibility: hidden;
-  }
-
-  html[data-theme-initialized] {
-    visibility: visible;
-  }
-</style>
