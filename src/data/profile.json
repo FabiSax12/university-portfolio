@@ -1,0 +1,234 @@
+{
+  "basics": {
+    "email": "vargasarayafabian11@gmail.com",
+    "label": "Computer Engineering student · Full-stack development, cloud infrastructure and AI agent engineering",
+    "location": {
+      "address": "San Carlos, Costa Rica"
+    },
+    "name": "Fabián Ricardo Vargas Araya",
+    "profiles": [
+      {
+        "network": "fabian-vargas.com",
+        "url": "https://fabian-vargas.com"
+      },
+      {
+        "network": "FabiSax12",
+        "url": "https://github.com/FabiSax12"
+      },
+      {
+        "network": "fabian-va",
+        "url": "https://linkedin.com/in/fabian-va"
+      }
+    ],
+    "summary": "Computer Engineering student seeking a software engineering internship in full-stack development, AI agent engineering and cloud infrastructure. 2+ years of hands-on experience building web applications and cloud systems with Python, FastAPI, TypeScript, React and Next.js on AWS and Azure. Built a distributed processing platform on AWS (FastAPI, SQS, DynamoDB, Terraform) and maintain a production application used by TEC students, with automated tests, GitHub Actions CI/CD and telemetry (Application Insights). Ship code orchestrating AI coding agents (Claude Code, Model Context Protocol, Agent Skills) through a spec-driven workflow using written specs, scoped Jira tickets and human review of every change. Work daily with Git and the Linux command line and make progress from high-level guidance."
+  },
+  "certificates": [
+    {
+      "date": "2026-09",
+      "issuer": "AWS Training & Certification",
+      "name": "AWS Serverless Demonstrated"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Tecnológico de Costa Rica (TEC), San Carlos Campus",
+      "startDate": "2024-02",
+      "studyType": "B.S. in Computer Engineering"
+    },
+    {
+      "endDate": "2023-12",
+      "institution": "CTP Nataniel Arias Murillo",
+      "startDate": "2021-02",
+      "studyType": "Technical Diploma in Electrotechnics"
+    }
+  ],
+  "meta": {
+    "schemaVersion": 1,
+    "variant": "Intern Fullstack Dev"
+  },
+  "projects": [
+    {
+      "description": "Software Design course project: learning microservices with a focus on cloud architecture.",
+      "endDate": "2025-12",
+      "highlights": [
+        "Three independent services, each with hexagonal architecture and clean code practices. Each service has its own database, Docker image and GitHub Actions pipeline.",
+        "Deployed on AWS with IaC provisioned by Terraform (S3 + CloudFront, Cognito, API Gateway, ECS, RDS, DynamoDB).",
+        "Event-based notifications with SQS, Lambda, SES and delivered to browser via WebSocket."
+      ],
+      "keywords": [
+        "AWS",
+        "Azure",
+        "Docker",
+        "GitHub Actions",
+        "Go",
+        "Java",
+        "NestJS",
+        "PostgreSQL",
+        "React",
+        "Spring Boot",
+        "TypeScript"
+      ],
+      "name": "Uniflow",
+      "startDate": "2025-08",
+      "url": "https://github.com/FabiSax12/Uniflow"
+    },
+    {
+      "description": "Team project for the Operating Systems course: a distributed platform that splits media-processing cases into sub-tasks and runs them in parallel on three EC2 worker pools.",
+      "endDate": "2026-10",
+      "highlights": [
+        "Built the FastAPI coordinator for a platform that splits media-processing cases into sub-tasks, runs them in parallel on three worker pools (separate EC2 instances) and closes each case with a consolidated report.",
+        "Implemented the messaging flow on Amazon SQS (6 priority work queues, a results queue and a dead-letter queue) and closed cases with DynamoDB transactions that count finished sub-tasks.",
+        "Provisioned the stack with Terraform modules (queues, data, compute, frontend).",
+        "Added monitoring: worker heartbeats every 5 s, a system snapshot every 2 s over REST and WebSocket, and alerts for queue saturation or unresponsive workers."
+      ],
+      "keywords": [
+        "Amazon CloudFront",
+        "Amazon DynamoDB",
+        "Amazon EC2",
+        "Amazon S3",
+        "Amazon SQS",
+        "AWS",
+        "FastAPI",
+        "FFmpeg",
+        "JavaScript",
+        "Linux",
+        "Python",
+        "React",
+        "Terraform",
+        "Vite"
+      ],
+      "name": "Distributed Multimedia Processing",
+      "startDate": "2026-09",
+      "url": "https://github.com/FabiSax12/distributed-multimedia-processing"
+    }
+  ],
+  "skills": [
+    {
+      "keywords": [
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "Java",
+        "SQL",
+        "HTML5",
+        "CSS3"
+      ],
+      "name": "Languages"
+    },
+    {
+      "keywords": [
+        "React",
+        "Next.js (App Router)",
+        "TanStack Start",
+        "TanStack Router",
+        "TanStack Query",
+        "Astro",
+        "Tailwind CSS",
+        "Zustand"
+      ],
+      "name": "Frontend"
+    },
+    {
+      "keywords": [
+        "FastAPI",
+        "REST APIs",
+        "WebSocket",
+        "JSON",
+        "Node.js",
+        "Express",
+        "NestJS",
+        "Spring Boot",
+        "Microservices",
+        "Event-Driven Architecture",
+        "Asynchronous Programming",
+        "Zod"
+      ],
+      "name": "Backend & APIs"
+    },
+    {
+      "keywords": [
+        "PostgreSQL",
+        "SQL Server",
+        "MongoDB",
+        "Supabase"
+      ],
+      "name": "Databases"
+    },
+    {
+      "keywords": [
+        "AWS S3",
+        "AWS CloudFront",
+        "Azure Static Web Apps",
+        "Azure Application Insights",
+        "Docker",
+        "Vercel"
+      ],
+      "name": "Cloud & IaC"
+    },
+    {
+      "keywords": [
+        "pytest",
+        "Vitest",
+        "Playwright",
+        "Unit / Integration Testing",
+        "GitHub Actions",
+        "CI/CD Pipelines"
+      ],
+      "name": "Testing & CI/CD"
+    },
+    {
+      "keywords": [
+        "Claude Code",
+        "Model Context Protocol (MCP)",
+        "Agent Skills",
+        "AI Agents",
+        "Spec-Driven Development",
+        "Test-Driven Development (TDD)",
+        "n8n"
+      ],
+      "name": "AI & Agents"
+    },
+    {
+      "keywords": [
+        "Git",
+        "GitHub",
+        "Linux / Command Line",
+        "Jira",
+        "SCRUM / Agile",
+        "Hexagonal Architecture",
+        "Clean Code",
+        "Code Review"
+      ],
+      "name": "Tools & Practices"
+    },
+    {
+      "keywords": [
+        "Spanish (native)",
+        "English (B2)"
+      ],
+      "name": "Spoken Languages"
+    }
+  ],
+  "work": [
+    {
+      "highlights": [
+        "Support faculty by reviewing and grading student assignments and projects on hexagonal architecture, microservices, cloud and UX/UI.",
+        "Give written, actionable feedback on design decisions to reinforce student learning.",
+        "Answer students' technical questions, explaining software design and architecture concepts clearly in person and in writing."
+      ],
+      "name": "Tecnológico de Costa Rica (TEC)",
+      "position": "Teaching Assistant, Software Design",
+      "startDate": "2026-02",
+      "summary": "Hexagonal Architecture · Microservices · Cloud · UX/UI"
+    },
+    {
+      "endDate": "2023-12",
+      "highlights": [
+        "Completed the supervised internship required for the Technical Diploma in Electrotechnics (CTP Nataniel Arias Murillo)."
+      ],
+      "name": "Electro Beyco",
+      "position": "Electrical Technician (Supervised Internship)",
+      "startDate": "2023-10"
+    }
+  ]
+}
